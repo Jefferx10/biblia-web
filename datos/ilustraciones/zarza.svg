@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 260" role="img"><rect width="400" height="260" fill="#F2DDB6"/><path d="M0 150 90 90 160 130 250 70 400 150V260H0z" fill="#C9A06A"/><path d="M0 200q200-40 400 0V260H0z" fill="#E3B878"/>
+<path d="M230 210c-4-30 6-50 20-70M250 210c0-34-4-54-16-76M240 210c10-26 30-40 44-50M240 210c-14-20-34-28-50-30" stroke="#5B6B3A" stroke-width="6" stroke-linecap="round" fill="none"/>
+<path d="M200 170c-10-40 20-50 16-90 24 20 20 40 30 54 6-20 18-30 16-60 26 30 34 60 22 96z" fill="#E8742A"/><path d="M216 168c-4-24 12-34 14-56 12 16 12 30 18 38 6-12 12-16 12-34 14 22 16 40 8 52z" fill="#F3C54B"/>
+<g transform="translate(96 186)"><path d="M-26 34q-6-44 26-50 30 4 30 50z" fill="#4C8FE0"/><circle cx="4" cy="-26" r="12" fill="#E3B48A"/><path d="M-8 -28a12 12 0 0 1 24 0q-12-7-24 0z" fill="#8A8F9E"/><path d="M16 -30q6 14-2 22" stroke="#8A8F9E" stroke-width="5" fill="none"/><path d="M10 -4l28 -10" stroke="#E3B48A" stroke-width="6" stroke-linecap="round"/></g>
+<g fill="#8A5A2B"><ellipse cx="150" cy="226" rx="12" ry="4"/><ellipse cx="170" cy="230" rx="12" ry="4"/></g></svg>

@@ -1,0 +1,1645 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Lámpara · Biblia Reina-Valera</title>
+<meta name="description" content="Lee la Biblia por capítulo, proyecta versículos y aprende con preguntas para niños y adultos.">
+<meta name="theme-color" content="#1B2238">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231B2238'/%3E%3Cpath d='M32 10c7 9 11 15 11 22a11 11 0 0 1-22 0c0-7 4-13 11-22z' fill='%23D8AE56'/%3E%3Crect x='18' y='47' width='28' height='5' rx='2.5' fill='%23D8AE56'/%3E%3C/svg%3E">
+<style>
+:root{
+  --paper:#F3F5F7; --surface:#FFFFFF; --ink:#1B2238; --ink-2:#4F5775; --line:#D9DEE6;
+  --rubric:#9B2335; --gold:#A97A1E; --gold-wash:rgba(214,170,70,.30); --mark:rgba(214,170,70,.16);
+  --rail:#1B2238; --rail-ink:#C9CFE3; --rail-active:#D8AE56;
+  --primary:#24346B; --primary-ink:#FFFFFF; --focus:#2F62E0;
+  --ok:#2A7A4B; --bad:#B3261E;
+  --serif:"Iowan Old Style","Palatino Linotype","Book Antiqua",Palatino,"Noto Serif",Georgia,serif;
+  --sans:"Avenir Next","Segoe UI","Helvetica Neue",Roboto,"Noto Sans",system-ui,sans-serif;
+  --rs:20px;
+}
+[data-theme="noche"]{
+  --paper:#12172A; --surface:#1A2038; --ink:#E6E3DA; --ink-2:#A6ACC2; --line:#2C3452;
+  --rubric:#E58A95; --gold:#D8AE56; --gold-wash:rgba(216,174,86,.24); --mark:rgba(216,174,86,.12);
+  --rail:#0C1020; --primary:#D8AE56; --primary-ink:#12172A; --focus:#8FB0FF; --ok:#5CC08A; --bad:#FF8A80;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.5}
+button,input,select{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+[hidden]{display:none!important}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+
+/* ---------- estructura ---------- */
+.rail{position:fixed;inset:0 auto 0 0;width:212px;background:var(--rail);color:var(--rail-ink);display:flex;flex-direction:column;padding:22px 14px;z-index:20}
+.brand{display:flex;align-items:center;gap:10px;padding:0 8px 26px;color:#fff;font-family:var(--serif);font-size:1.45rem;letter-spacing:.01em}
+.brand svg{width:30px;height:30px;flex:none}
+.nav{display:flex;flex-direction:column;gap:4px}
+.nav button{display:flex;align-items:center;gap:12px;border:0;background:none;padding:11px 10px;border-radius:8px;text-align:left;color:inherit;font-size:.98rem;position:relative}
+.nav button svg{width:22px;height:22px;flex:none}
+.nav button:hover{background:rgba(255,255,255,.06);color:#fff}
+.nav button[aria-current="page"]{color:#fff;background:rgba(255,255,255,.08)}
+.nav button[aria-current="page"]::before{content:"";position:absolute;left:-14px;top:9px;bottom:9px;width:4px;border-radius:0 4px 4px 0;background:var(--rail-active)}
+.rail-foot{margin-top:auto;font-size:.78rem;opacity:.65;padding:0 8px;line-height:1.4}
+main{margin-left:212px;min-height:100vh}
+.view{min-height:100vh}
+.page{max-width:760px;margin:0 auto;padding:40px 28px 120px}
+.page.wide{max-width:1120px}
+h1{font-family:var(--serif);font-weight:600;font-size:2.3rem;line-height:1.15;margin:0 0 10px}
+h2{font-size:1.05rem;margin:0 0 10px}
+.lead{color:var(--ink-2);margin:0 0 28px;max-width:60ch}
+
+@media (max-width:899px){
+  .rail{inset:auto 0 0 0;width:auto;height:calc(64px + env(safe-area-inset-bottom));flex-direction:row;padding:0 6px env(safe-area-inset-bottom)}
+  .brand,.rail-foot{display:none}
+  .nav{flex-direction:row;flex:1;justify-content:space-around}
+  .nav button{flex-direction:column;gap:2px;font-size:.72rem;padding:8px 4px;flex:1;align-items:center}
+  .nav button[aria-current="page"]{background:none}
+  .nav button[aria-current="page"]::before{left:30%;right:30%;top:0;bottom:auto;height:3px;width:auto;border-radius:0 0 3px 3px}
+  main{margin-left:0;padding-bottom:64px}
+  .page{padding:28px 18px 110px}
+  h1{font-size:1.9rem}
+}
+
+/* ---------- botones ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:10px 16px;font-weight:500;min-height:44px}
+.btn:hover{border-color:var(--ink-2)}
+.btn.primary{background:var(--primary);color:var(--primary-ink);border-color:transparent}
+.btn.primary:hover{filter:brightness(1.1)}
+.btn[disabled]{opacity:.45;cursor:default}
+.btn svg{width:20px;height:20px}
+.icon-btn{border:0;background:none;width:44px;height:44px;border-radius:10px;display:inline-grid;place-items:center;color:var(--ink)}
+.icon-btn:hover{background:var(--mark)}
+.icon-btn[disabled]{opacity:.3;cursor:default;background:none}
+.icon-btn svg{width:22px;height:22px}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--surface)}
+.seg button{border:0;background:none;padding:9px 16px;min-height:42px}
+.seg button+button{border-left:1px solid var(--line)}
+.seg button[aria-pressed="true"]{background:var(--primary);color:var(--primary-ink)}
+.switch{display:flex;align-items:center;gap:12px;cursor:pointer;min-height:44px}
+.switch input{appearance:none;width:44px;height:26px;border-radius:13px;background:var(--line);position:relative;flex:none;cursor:pointer;transition:background .15s}
+.switch input::after{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#fff;transition:transform .15s}
+.switch input:checked{background:var(--primary)}
+.switch input:checked::after{transform:translateX(18px)}
+[data-theme="noche"] .switch input::after{background:var(--paper)}
+[data-theme="noche"] .switch input:checked::after{background:var(--primary-ink)}
+
+/* ---------- lector ---------- */
+.readbar{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.readbar-in{max-width:760px;margin:0 auto;display:flex;align-items:center;gap:4px;padding:6px 14px}
+.title-btn{border:0;background:none;display:flex;align-items:center;gap:6px;padding:8px 10px;border-radius:10px;font-family:var(--serif);font-size:1.25rem;font-weight:600;min-height:44px}
+.title-btn:hover{background:var(--mark)}
+.title-btn svg{width:18px;height:18px;opacity:.6}
+.readbar .spacer{flex:1}
+#chapter{max-width:760px;margin:0 auto;padding:34px 28px 150px;font-size:var(--rs)}
+.ch-book{font-family:var(--sans);font-size:.95rem;color:var(--ink-2);margin:0 0 14px;letter-spacing:.02em}
+.ch-text{font-family:var(--serif);line-height:1.72;hyphens:auto;-webkit-hyphens:auto}
+[data-font="sans"] .ch-text{font-family:var(--sans);line-height:1.62}
+.dropnum{float:left;font-family:var(--serif);font-size:4.1em;line-height:.82;color:var(--gold);padding:.06em .14em 0 0;margin-left:-.04em;font-weight:500;font-variant-numeric:lining-nums}
+.v{border-radius:4px;cursor:pointer;-webkit-tap-highlight-color:transparent;box-decoration-break:clone;-webkit-box-decoration-break:clone;transition:background-color .15s}
+.v:hover{background:var(--mark)}
+.v.mark{background:var(--mark);box-shadow:inset 0 -2px 0 var(--gold)}
+.v.sel{background:var(--gold-wash)}
+.v.flash{animation:flash 1.6s ease-out}
+@keyframes flash{0%,40%{background:var(--gold-wash)}100%{background:transparent}}
+.v:focus-visible{outline-offset:1px}
+.vn{font-family:var(--sans);font-size:.56em;font-weight:600;color:var(--rubric);vertical-align:.62em;line-height:0;margin:0 .18em 0 .1em;user-select:none}
+.v.first .vn{display:none}
+.lines .v{display:block;padding:.12em .2em;margin:0 -.2em}
+.lines .v.first{display:inline}
+.lines .v.first + .v{margin-top:0}
+.ch-nav{display:flex;justify-content:space-between;gap:12px;margin-top:48px;font-size:16px;clear:both}
+.ch-nav .btn{max-width:48%}
+.copyright{clear:both;margin:28px 0 0;font-family:var(--sans);font-size:.78rem;line-height:1.45;color:var(--ink-2)}
+
+#selbar{position:fixed;left:50%;bottom:24px;transform:translateX(calc(-50% + 106px));background:var(--ink);color:var(--paper);border-radius:14px;padding:6px 6px 6px 18px;display:flex;align-items:center;gap:4px;box-shadow:0 10px 30px rgba(10,14,30,.28);z-index:30;max-width:calc(100vw - 24px)}
+#selbar .ref{font-weight:600;margin-right:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:220px}
+#selbar button{border:0;background:none;color:inherit;display:flex;flex-direction:column;align-items:center;gap:1px;font-size:.72rem;padding:6px 10px;border-radius:9px;min-width:56px}
+#selbar button:hover{background:rgba(255,255,255,.1)}
+[data-theme="noche"] #selbar button:hover{background:rgba(0,0,0,.08)}
+#selbar svg{width:20px;height:20px}
+@media (max-width:899px){
+  #selbar{bottom:76px;transform:translateX(-50%);padding-left:12px}
+  #selbar .ref{max-width:110px;font-size:.9rem}
+  #selbar button{min-width:48px;padding:6px 6px}
+  #chapter{padding:26px 20px 170px}
+}
+
+/* ---------- diálogos ---------- */
+dialog{border:0;padding:0;background:var(--surface);color:var(--ink);border-radius:18px;box-shadow:0 20px 60px rgba(10,14,30,.35);width:min(720px,calc(100vw - 24px));max-height:min(86vh,760px)}
+dialog::backdrop{background:rgba(12,16,32,.5)}
+.dlg-head{display:flex;align-items:center;gap:6px;padding:12px 12px 10px 18px;border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--surface);z-index:1}
+.dlg-head h2{flex:1;margin:0;font-family:var(--serif);font-size:1.3rem}
+.dlg-body{padding:16px 18px 22px;overflow:auto;max-height:calc(min(86vh,760px) - 66px)}
+@media (max-width:640px){
+  dialog{width:100vw;max-width:100vw;margin:auto 0 0;border-radius:18px 18px 0 0;max-height:88vh}
+  .dlg-body{max-height:calc(88vh - 66px);padding-bottom:calc(22px + env(safe-area-inset-bottom))}
+}
+.book-filter{width:100%;border:1px solid var(--line);background:var(--paper);border-radius:10px;padding:11px 14px;margin-bottom:14px}
+.testament{margin:0 0 18px}
+.testament h3{font-size:.88rem;font-weight:600;color:var(--ink-2);margin:0 0 8px}
+.books{display:grid;grid-template-columns:repeat(auto-fill,minmax(132px,1fr));gap:6px}
+.books button{border:1px solid var(--line);background:none;border-radius:8px;padding:9px 10px;text-align:left;min-height:42px}
+.books button:hover,.nums button:hover{border-color:var(--ink-2)}
+.books button.cur,.nums button.cur{border-color:var(--gold);background:var(--mark);font-weight:600}
+.nums{display:grid;grid-template-columns:repeat(auto-fill,minmax(52px,1fr));gap:6px}
+.nums button{border:1px solid var(--line);background:none;border-radius:8px;height:48px;font-variant-numeric:tabular-nums}
+.nums button[disabled]{opacity:.3;cursor:default}
+.crumb{display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+.setting{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 0;border-bottom:1px solid var(--line)}
+.setting:last-child{border-bottom:0}
+.size-ctl{display:flex;align-items:center;gap:8px}
+.size-ctl output{min-width:3.4ch;text-align:center;font-variant-numeric:tabular-nums}
+.size-sample{font-family:var(--serif);margin:6px 0 4px;color:var(--ink-2)}
+input[type=range]{accent-color:var(--primary);width:150px}
+
+/* ---------- búsqueda ---------- */
+.search-box{position:relative;margin-bottom:20px}
+.search-box input{width:100%;border:1px solid var(--line);background:var(--surface);border-radius:12px;padding:14px 16px 14px 46px;font-size:1.05rem}
+.search-box svg{position:absolute;left:15px;top:50%;transform:translateY(-50%);width:20px;height:20px;color:var(--ink-2)}
+.results{display:flex;flex-direction:column}
+.result{border:0;border-bottom:1px solid var(--line);background:none;text-align:left;padding:14px 4px;display:block;width:100%}
+.result:hover{background:var(--mark)}
+.result strong{display:block;font-size:.92rem;color:var(--rubric);margin-bottom:2px}
+.result span{font-family:var(--serif);font-size:1.05rem;line-height:1.55}
+.result mark{background:var(--gold-wash);color:inherit;border-radius:3px;padding:0 1px}
+.muted{color:var(--ink-2)}
+.empty{padding:28px 0;color:var(--ink-2)}
+
+/* ---------- proyección ---------- */
+.proj-grid{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:32px;align-items:start}
+@media (max-width:1000px){.proj-grid{grid-template-columns:1fr}#v-proyectar:not(.remote-control) .proj-grid>aside{order:-1}}
+.remote-code{font-family:var(--sans);font-size:2.3rem;font-weight:700;letter-spacing:.14em;margin:4px 0 12px;font-variant-numeric:tabular-nums;color:var(--ink)}
+.remote-qr{width:176px;height:176px;background:#fff;padding:10px;border-radius:12px;margin:0 0 14px;box-shadow:0 0 0 1px var(--line)}
+.remote-qr img,.remote-qr canvas{width:156px!important;height:156px!important;display:block}
+.remote-qr:empty{display:none}
+.remote-form input{text-transform:uppercase;letter-spacing:.12em;font-weight:600}
+#v-proyectar.remote-control #open-win,#v-proyectar.remote-control #open-ovl,#v-proyectar.remote-control #proj-status{display:none}
+.status.wait i{background:var(--gold)}
+.status.err i{background:var(--bad)}
+@media (max-width:640px){.proj-controls{width:100%}.proj-controls .btn{flex:1;min-height:56px}}
+.preview-frame{border-radius:12px;overflow:hidden;box-shadow:0 0 0 1px var(--line),0 12px 32px rgba(10,14,30,.14);aspect-ratio:16/9;background:#000}
+.preview-frame .stage{width:100%;height:100%}
+.live-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:14px 0 6px;flex-wrap:wrap}
+.live-label{font-weight:600}
+.proj-controls{display:flex;gap:8px;flex-wrap:wrap}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px}
+.panel+.panel{margin-top:14px}
+.status{display:flex;align-items:center;gap:8px;font-size:.92rem;margin-bottom:12px;color:var(--ink-2)}
+.status i{width:9px;height:9px;border-radius:50%;background:var(--line);display:inline-block}
+.status.on i{background:var(--ok)}
+.status.on{color:var(--ink)}
+.stack{display:flex;flex-direction:column;gap:8px}
+.ref-form{display:flex;gap:8px}
+.ref-form input{flex:1;min-width:0;border:1px solid var(--line);background:var(--paper);border-radius:10px;padding:10px 12px}
+.field-label{display:block;font-size:.88rem;color:var(--ink-2);margin:14px 0 6px}
+.kbd{display:grid;grid-template-columns:auto 1fr;gap:6px 12px;font-size:.9rem;margin-top:10px}
+kbd{font-family:var(--sans);font-size:.8rem;border:1px solid var(--line);border-bottom-width:2px;border-radius:5px;padding:1px 7px;background:var(--paper);white-space:nowrap}
+details summary{cursor:pointer;font-weight:600;min-height:32px}
+
+/* escenario (vista previa y pantalla completa) */
+#ovl{position:fixed;inset:0;z-index:100;background:#000;display:none}
+#ovl.open{display:block}
+#ovl .stage{width:100%;height:100%}
+.ovl-bar{position:absolute;top:14px;right:14px;display:flex;gap:8px;opacity:0;transition:opacity .25s}
+#ovl.show-bar .ovl-bar,.ovl-bar:focus-within{opacity:1}
+.ovl-bar button{border:0;border-radius:10px;padding:10px 14px;background:rgba(255,255,255,.14);color:#fff;font-size:.95rem;min-height:44px}
+.ovl-bar button:hover{background:rgba(255,255,255,.26)}
+.ovl-tap{position:absolute;top:0;bottom:0;width:30%;border:0;background:none}
+.ovl-tap.l{left:0}.ovl-tap.r{right:0}
+
+/* ---------- preguntas ---------- */
+.q-setup{display:flex;flex-wrap:wrap;gap:18px 32px;align-items:center;margin-bottom:26px}
+.levels{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width:640px){.levels{grid-template-columns:1fr}}
+.level{border:0;text-align:left;border-radius:20px;padding:26px 24px 22px;min-height:210px;display:flex;flex-direction:column;gap:8px;position:relative;overflow:hidden}
+.level strong{font-size:1.7rem;line-height:1.1}
+.level span{max-width:30ch}
+.level small{margin-top:auto;opacity:.8}
+.level.kids{background:#2F6FC4;color:#fff;font-family:var(--sans)}
+.level.kids strong{font-size:2rem}
+.level.kids .deco{position:absolute;right:-14px;top:-18px;width:104px;height:104px;opacity:.9}
+.level.kids span{max-width:24ch}
+.level.adults{background:var(--surface);border:1px solid var(--line);color:var(--ink)}
+.level.adults strong{font-family:var(--serif);font-weight:600}
+.level:hover{transform:translateY(-2px)}
+.level{transition:transform .15s}
+
+.q-top{display:flex;align-items:center;gap:14px;margin-bottom:26px}
+.q-progress{flex:1;height:8px;border-radius:4px;background:var(--line);overflow:hidden}
+.q-progress span{display:block;height:100%;background:var(--gold);transition:width .3s}
+.q-count{font-variant-numeric:tabular-nums;color:var(--ink-2);white-space:nowrap}
+.q-score{font-weight:700;white-space:nowrap;display:inline-flex;align-items:center;gap:4px}
+.q-score svg{width:20px;height:20px;color:var(--gold)}
+.q-score.pop{animation:pop .45s ease-out}
+@keyframes pop{40%{transform:scale(1.35)}}
+.q-text{font-family:var(--serif);font-size:1.75rem;line-height:1.25;font-weight:600;margin:0 0 24px}
+.q-opts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media (max-width:640px){.q-opts{grid-template-columns:1fr}.q-text{font-size:1.45rem}}
+.q-opt{display:flex;align-items:center;gap:12px;text-align:left;border:1px solid var(--line);background:var(--surface);border-radius:12px;padding:14px 16px;min-height:60px;font-size:1.05rem}
+.q-opt:hover:not([disabled]){border-color:var(--ink-2)}
+.q-opt[disabled]{cursor:default}
+.q-opt .letter{width:30px;height:30px;border-radius:8px;border:1px solid var(--line);display:grid;place-items:center;font-weight:600;font-size:.9rem;flex:none}
+.q-opt .res{margin-left:auto;font-size:.85rem;font-weight:600;white-space:nowrap}
+.q-opt.ok{border-color:var(--ok);box-shadow:inset 0 0 0 1px var(--ok)}
+.q-opt.ok .res{color:var(--ok)}
+.q-opt.bad{border-color:var(--bad);box-shadow:inset 0 0 0 1px var(--bad)}
+.q-opt.bad .res{color:var(--bad)}
+.q-opt.dim{opacity:.55}
+.shape{width:22px;height:22px;flex:none;display:inline-block}
+.s0{border-radius:50%;background:#2F6FC4}
+.s1{clip-path:polygon(50% 4%,100% 96%,0 96%);background:#D9951F}
+.s2{background:#2E9A5C;border-radius:3px}
+.s3{background:#C8445A;transform:rotate(45deg) scale(.78);border-radius:2px}
+.quiz.kids .q-text{font-family:var(--sans);font-weight:700}
+.quiz.kids .q-opt{border-width:2px;border-radius:16px;font-weight:600;min-height:68px;font-size:1.12rem}
+.q-feedback{margin-top:22px;border-radius:14px;padding:18px 20px;background:var(--surface);border:1px solid var(--line)}
+.verdict{font-weight:700;font-size:1.15rem;margin:0 0 6px}
+.verdict.ok{color:var(--ok)}.verdict.bad{color:var(--bad)}
+.q-verse{margin:14px 0 0;padding:0 0 0 14px;border-left:3px solid var(--gold);font-family:var(--serif);font-size:1.05rem}
+.q-verse p{margin:0 0 4px}
+.q-verse cite{font-style:normal;font-family:var(--sans);font-size:.9rem;color:var(--rubric);font-weight:600}
+.row{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px;justify-content:flex-end}
+.q-end{text-align:center;padding-top:20px}
+.stars{display:flex;justify-content:center;flex-wrap:wrap;gap:4px;margin:10px auto 18px;max-width:420px}
+.stars svg{width:34px;height:34px;color:var(--line)}
+.stars svg.on{color:var(--gold)}
+.big-score{font-family:var(--serif);font-size:4.2rem;line-height:1;margin:10px 0}
+.missed{text-align:left;margin-top:30px}
+.missed li{margin-bottom:10px}
+.link{border:0;background:none;color:var(--primary);text-decoration:underline;text-underline-offset:3px;padding:4px 2px}
+[data-theme="noche"] .link{color:var(--gold)}
+
+#toast{position:fixed;left:50%;top:18px;transform:translate(-50%,-20px);background:var(--ink);color:var(--paper);padding:10px 18px;border-radius:10px;opacity:0;pointer-events:none;transition:.2s;z-index:200;max-width:calc(100vw - 32px);text-align:center}
+#toast.show{opacity:1;transform:translate(-50%,0)}
+#loading{position:fixed;inset:0;display:grid;place-items:center;background:var(--paper);z-index:300;font-family:var(--serif);font-size:1.3rem;color:var(--ink-2);text-align:center;padding:24px}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+
+/* ---------- perfil ---------- */
+.prof-head{display:flex;align-items:center;gap:20px;margin:0 0 26px;flex-wrap:wrap}
+.avatar{width:76px;height:76px;border-radius:50%;background:var(--rail);color:#D8AE56;display:grid;place-items:center;font-family:var(--serif);font-size:2.2rem;flex:none}
+.avatar svg{width:36px;height:36px}
+.prof-fields{flex:1;min-width:240px;display:flex;flex-direction:column;gap:10px}
+.text-in{width:100%;border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:11px 14px}
+textarea.text-in{resize:vertical;min-height:70px;line-height:1.4}
+.stats{display:flex;gap:28px;flex-wrap:wrap;margin:4px 0 30px;color:var(--ink-2)}
+.stats b{display:block;font-family:var(--serif);font-size:1.7rem;color:var(--ink);font-weight:600;line-height:1.1}
+.prof-section{margin:0 0 16px}
+.prof-section>h2{font-family:var(--serif);font-size:1.35rem;font-weight:600;margin:0 0 4px}
+.prof-section>.muted{margin:0 0 12px}
+.row-set{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 0;border-top:1px solid var(--line);flex-wrap:wrap}
+.row-set:first-of-type{border-top:0}
+.row-set>span:first-child{flex:1;min-width:110px}
+.row-set small{display:block;color:var(--ink-2)}
+.types{display:flex;flex-direction:column;gap:2px}
+.check{display:flex;gap:12px;align-items:flex-start;padding:10px 0;cursor:pointer}
+.check input{width:20px;height:20px;margin:2px 0 0;accent-color:var(--primary);flex:none}
+.check small{display:block;color:var(--ink-2)}
+.danger{color:var(--bad)}
+
+/* mis preguntas */
+.mine{display:flex;flex-direction:column;gap:8px;margin:12px 0 14px}
+.mine-item{display:flex;align-items:center;gap:12px;border:1px solid var(--line);border-radius:12px;padding:8px 10px 8px 8px;background:var(--paper)}
+.thumb{width:72px;height:48px;border-radius:8px;background:var(--line);overflow:hidden;flex:none;display:grid;place-items:center;color:var(--ink-2)}
+.thumb img,.thumb svg{width:100%;height:100%;object-fit:cover;display:block}
+.thumb video{width:100%;height:100%;object-fit:cover}
+.mine-item .t{flex:1;min-width:0}
+.mine-item .t b{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:600}
+.mine-item .t small{color:var(--ink-2)}
+
+/* editor */
+#qedit{width:min(640px,calc(100vw - 24px))}
+.ed-field{margin:0 0 16px}
+.ed-field>label,.ed-field>.lbl{display:block;font-size:.9rem;font-weight:600;margin:0 0 6px}
+.ans{display:flex;align-items:center;gap:10px;margin:0 0 8px}
+.ans input[type=radio]{width:22px;height:22px;accent-color:var(--ok);flex:none;margin:0}
+.ans .text-in{padding:9px 12px}
+.ed-media-prev{margin-top:10px;border-radius:12px;overflow:hidden;background:#000;max-height:260px;display:flex;justify-content:center}
+.ed-media-prev img,.ed-media-prev video{max-width:100%;max-height:260px;display:block}
+.ed-media-prev iframe{width:100%;aspect-ratio:16/9;border:0;display:block}
+.or{display:flex;align-items:center;gap:10px;color:var(--ink-2);font-size:.85rem;margin:10px 0}
+.or::before,.or::after{content:"";flex:1;height:1px;background:var(--line)}
+.file-btn{position:relative;overflow:hidden}
+.file-btn input{position:absolute;inset:0;opacity:0;cursor:pointer}
+.hint{font-size:.85rem;color:var(--ink-2);margin:6px 0 0}
+.err{color:var(--bad);font-size:.9rem;margin:0 0 10px}
+
+/* ---------- multimedia en preguntas ---------- */
+.q-media{margin:0 auto 20px;border-radius:16px;overflow:hidden;background:var(--line);width:fit-content;max-width:100%}
+.q-media.wide{width:100%}
+.q-media svg{width:min(100%,560px);height:auto;display:block}
+.q-media img{max-width:100%;max-height:380px;display:block;object-fit:contain}
+.q-media video{width:100%;max-height:400px;background:#000;display:block}
+.q-media iframe{width:100%;aspect-ratio:16/9;border:0;display:block}
+.quiz.kids .q-media{border-radius:22px;box-shadow:0 0 0 4px var(--surface),0 0 0 6px var(--line)}
+.media-note{display:flex;gap:8px;align-items:center;margin:-8px 0 16px;flex-wrap:wrap}
+.q-timer{height:6px;border-radius:3px;background:var(--line);overflow:hidden;margin:-14px 0 22px}
+.q-timer span{display:block;height:100%;background:var(--primary);transform-origin:left;transition:transform .25s linear}
+.q-timer.low span{background:var(--bad)}
+.q-config{color:var(--ink-2);margin:22px 0 0}
+.tag{display:inline-block;font-size:.78rem;border:1px solid var(--line);border-radius:6px;padding:1px 7px;color:var(--ink-2);margin-left:6px;vertical-align:2px}
+.yt-ph{display:grid;place-items:center;width:100%;height:100%;color:#fff;background:#1a1a1a;font:600 1rem var(--sans)}
+
+</style>
+</head>
+<body>
+<div id="loading">Abriendo la Biblia…</div>
+
+<nav class="rail" aria-label="Secciones">
+  <div class="brand"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M32 8c8 10 12 17 12 24a12 12 0 0 1-24 0c0-7 4-14 12-24z" fill="#D8AE56"/><rect x="17" y="49" width="30" height="5" rx="2.5" fill="#D8AE56"/></svg>Lámpara</div>
+  <div class="nav">
+    <button data-view="leer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6.5C10 5 7 4.5 3.5 5v13c3.5-.5 6.5 0 8.5 1.5 2-1.5 5-2 8.5-1.5V5C17 4.5 14 5 12 6.5z"/><path d="M12 6.5v13"/></svg>Leer</button>
+    <button data-view="buscar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg>Buscar</button>
+    <button data-view="preguntas"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.3a2.6 2.6 0 0 1 5 .9c0 1.7-2.5 2.2-2.5 3.8"/><path d="M12 17.2h.01"/></svg>Preguntas</button>
+    <button data-view="proyectar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M12 16v4M8 20h8"/></svg>Proyectar</button>
+    <button data-view="perfil"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="8.5" r="3.8"/><path d="M4.5 20c1.2-3.6 4-5.5 7.5-5.5s6.3 1.9 7.5 5.5"/></svg>Perfil</button>
+  </div>
+  <p class="rail-foot" id="rail-version">Reina-Valera 1909<br>Texto de dominio público</p>
+</nav>
+
+<main>
+  <!-- LEER -->
+  <section class="view" id="v-leer" hidden>
+    <div class="readbar"><div class="readbar-in">
+      <button class="icon-btn" id="prev-ch" aria-label="Capítulo anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 5-7 7 7 7"/></svg></button>
+      <button class="title-btn" id="title-btn" aria-haspopup="dialog"><span id="title-txt">Juan 3</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg></button>
+      <button class="icon-btn" id="next-ch" aria-label="Capítulo siguiente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 5 7 7-7 7"/></svg></button>
+      <span class="spacer"></span>
+      <button class="icon-btn" id="aa-btn" aria-label="Tamaño y apariencia del texto"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18 8 6l5 12M4.6 14h6.8"/><path d="m14 18 3.5-8 3.5 8M15 15.5h5"/></svg></button>
+    </div></div>
+    <article id="chapter" aria-live="polite"></article>
+  </section>
+
+  <!-- BUSCAR -->
+  <section class="view" id="v-buscar" hidden>
+    <div class="page">
+      <h1>Buscar</h1>
+      <p class="lead">Escribe una cita como Juan 3:16 o Sal 23, o una palabra como misericordia.</p>
+      <div class="search-box">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg>
+        <input id="q" type="search" autocomplete="off" placeholder="Cita o palabra" aria-label="Buscar en la Biblia">
+      </div>
+      <div id="results" class="results"></div>
+    </div>
+  </section>
+
+  <!-- PREGUNTAS -->
+  <section class="view" id="v-preguntas" hidden><div class="page" id="quiz"></div></section>
+
+  <!-- PERFIL -->
+  <section class="view" id="v-perfil" hidden><div class="page" id="perfil"></div></section>
+
+  <!-- PROYECTAR -->
+  <section class="view" id="v-proyectar" hidden>
+    <div class="page wide">
+      <h1>Proyectar</h1>
+      <p class="lead" id="proj-lead">Conecta el computador al proyector, abre la ventana del proyector y arrástrala a esa pantalla. Desde aquí controlas lo que se ve.</p>
+      <div class="proj-grid">
+        <div>
+          <div class="preview-frame"><div class="stage" id="preview"></div></div>
+          <div class="live-row">
+            <span class="live-label" id="live-label">Nada en pantalla</span>
+            <div class="proj-controls">
+              <button class="btn" id="p-prev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 5-7 7 7 7"/></svg>Anterior</button>
+              <button class="btn" id="p-next">Siguiente<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 5 7 7-7 7"/></svg></button>
+              <button class="btn" id="p-black" aria-pressed="false">Pantalla negra</button>
+            </div>
+          </div>
+          <div class="media-note" id="p-video" hidden><span class="muted">Video en pantalla</span><button class="btn" data-video="play">Reproducir</button><button class="btn" data-video="pause">Pausar</button></div>
+          <p class="muted">Para elegir versículos, ve a Leer, tócalos y usa el botón Proyectar.</p>
+        </div>
+        <aside>
+          <div class="panel" id="remote-panel"></div>
+          <div class="panel">
+            <div class="status" id="proj-status"><i></i><span>Proyector cerrado</span></div>
+            <div class="stack">
+              <button class="btn primary" id="open-win">Abrir ventana del proyector</button>
+              <button class="btn" id="open-ovl">Pantalla completa en este equipo</button>
+            </div>
+            <label class="field-label" for="proj-ref">Proyectar una cita</label>
+            <form class="ref-form" id="proj-ref-form"><input id="proj-ref" placeholder="Salmos 23:1-3" autocomplete="off"><button class="btn">Mostrar</button></form>
+          </div>
+          <div class="panel">
+            <h2>Apariencia en pantalla</h2>
+            <div data-slot="projection"></div>
+          </div>
+          <div class="panel">
+            <details><summary>Atajos de teclado</summary>
+              <div class="kbd"><span><kbd>→</kbd> <kbd>Espacio</kbd></span><span>Siguiente versículo</span><span><kbd>←</kbd></span><span>Versículo anterior</span><span><kbd>N</kbd></span><span>Pantalla negra</span><span>Doble clic</span><span>Pantalla completa en la ventana del proyector</span><span><kbd>Esc</kbd></span><span>Salir de pantalla completa</span></div>
+            </details>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div id="selbar" hidden role="toolbar" aria-label="Versículos seleccionados">
+  <span class="ref" id="sel-ref"></span>
+  <button id="sel-copy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V5.5A1.5 1.5 0 0 0 14.5 4h-9A1.5 1.5 0 0 0 4 5.5v9A1.5 1.5 0 0 0 5.5 16H8"/></svg>Copiar</button>
+  <button id="sel-share" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V4M8 8l4-4 4 4"/><path d="M5 12v7a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-7"/></svg>Compartir</button>
+  <button id="sel-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M6 4h12v17l-6-4-6 4z"/></svg><span>Marcar</span></button>
+  <button id="sel-proj"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M12 16v4M8 20h8"/></svg>Proyectar</button>
+  <button id="sel-clear" aria-label="Quitar selección"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>Cerrar</button>
+</div>
+
+<dialog id="picker" aria-labelledby="picker-title">
+  <div class="dlg-head"><h2 id="picker-title">Elegir pasaje</h2><button class="icon-btn" data-close aria-label="Cerrar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
+  <div class="dlg-body" id="picker-body"></div>
+</dialog>
+
+<dialog id="aa" aria-labelledby="aa-title" style="width:min(460px,calc(100vw - 24px))">
+  <div class="dlg-head"><h2 id="aa-title">Texto</h2><button class="icon-btn" data-close aria-label="Cerrar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
+  <div class="dlg-body"><div data-slot="reading"></div><p class="hint" style="margin-top:14px">Estos ajustes también están en <button class="link" data-go-view="perfil">Perfil</button>.</p></div>
+</dialog>
+
+<dialog id="qedit" aria-labelledby="qedit-title">
+  <div class="dlg-head"><h2 id="qedit-title">Nueva pregunta</h2><button class="icon-btn" data-close aria-label="Cerrar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
+  <div class="dlg-body" id="qedit-body"></div>
+</dialog>
+
+<div id="ovl" role="dialog" aria-label="Proyección a pantalla completa">
+  <div class="stage" id="ovl-stage"></div>
+  <button class="ovl-tap l" id="ovl-l" aria-label="Anterior"></button>
+  <button class="ovl-tap r" id="ovl-r" aria-label="Siguiente"></button>
+  <div class="ovl-bar"><button id="ovl-prev">Anterior</button><button id="ovl-next">Siguiente</button><button id="ovl-exit">Salir</button></div>
+</div>
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script>
+"use strict";
+/* =====================================================================
+   Lámpara · Biblia Reina-Valera
+   Lector, búsqueda, proyección, preguntas (banco, aleatorias, con imágenes
+   y videos, propias) y perfil con todos los ajustes.
+   ===================================================================== */
+const NAMES=["Génesis","Éxodo","Levítico","Números","Deuteronomio","Josué","Jueces","Rut","1 Samuel","2 Samuel","1 Reyes","2 Reyes","1 Crónicas","2 Crónicas","Esdras","Nehemías","Ester","Job","Salmos","Proverbios","Eclesiastés","Cantares","Isaías","Jeremías","Lamentaciones","Ezequiel","Daniel","Oseas","Joel","Amós","Abdías","Jonás","Miqueas","Nahúm","Habacuc","Sofonías","Hageo","Zacarías","Malaquías","Mateo","Marcos","Lucas","Juan","Hechos","Romanos","1 Corintios","2 Corintios","Gálatas","Efesios","Filipenses","Colosenses","1 Tesalonicenses","2 Tesalonicenses","1 Timoteo","2 Timoteo","Tito","Filemón","Hebreos","Santiago","1 Pedro","2 Pedro","1 Juan","2 Juan","3 Juan","Judas","Apocalipsis"];
+const ALIAS={gn:"genesis",ex:"exodo",lv:"levitico",nm:"numeros",dt:"deuteronomio",jos:"josue",jue:"jueces",jc:"jueces","1s":"1 samuel","2s":"2 samuel","1r":"1 reyes","2r":"2 reyes","1cr":"1 cronicas","2cr":"2 cronicas",est:"ester",sal:"salmos",salmo:"salmos",sl:"salmos",ps:"salmos",pr:"proverbios",prov:"proverbios",ec:"eclesiastes",ecl:"eclesiastes",cnt:"cantares",is:"isaias",jr:"jeremias",lm:"lamentaciones",ez:"ezequiel",dn:"daniel",os:"oseas",jl:"joel",am:"amos",abd:"abdias",jon:"jonas",mi:"miqueas",hab:"habacuc",sof:"sofonias",hag:"hageo",zac:"zacarias",mal:"malaquias",mt:"mateo",mc:"marcos",mr:"marcos",lc:"lucas",jn:"juan",hch:"hechos",hc:"hechos",ro:"romanos",rom:"romanos","1co":"1 corintios","2co":"2 corintios",ga:"galatas",gal:"galatas",ef:"efesios",fil:"filipenses",flp:"filipenses",col:"colosenses","1ts":"1 tesalonicenses","2ts":"2 tesalonicenses","1ti":"1 timoteo","2ti":"2 timoteo",tit:"tito",flm:"filemon",heb:"hebreos",stg:"santiago",sant:"santiago","1p":"1 pedro","2p":"2 pedro","1jn":"1 juan","2jn":"2 juan","3jn":"3 juan",jud:"judas",ap:"apocalipsis",apoc:"apocalipsis"};
+/* versión activa: se define en datos/versiones.json */
+let VERSIONS=[],VER={id:"rv1909",nombre:"Reina-Valera 1909",abreviatura:"RV 1909",archivo:"datos/biblia-rv1909.json",licencia:"Texto de dominio público",aviso:""};
+const $=(s,r=document)=>r.querySelector(s);
+const $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const norm=s=>s.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase();
+const NORM_NAMES=NAMES.map(norm);
+const range=(a,b)=>Array.from({length:b-a+1},(_,i)=>a+i);
+const pick=a=>a[Math.floor(Math.random()*a.length)];
+const shuffle=a=>{a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+
+/* ---------------- almacenamiento ---------------- */
+const mem={};
+const store={
+  get(k,d){try{const v=localStorage.getItem("lampara:"+k);return v==null?(k in mem?mem[k]:d):JSON.parse(v)}catch(e){return k in mem?mem[k]:d}},
+  set(k,v){mem[k]=v;try{localStorage.setItem("lampara:"+k,JSON.stringify(v))}catch(e){}}
+};
+/* IndexedDB para preguntas propias con fotos y videos */
+const DB={db:undefined,mem:new Map(),
+  open(){
+    if(this.db!==undefined)return Promise.resolve(this.db);
+    return new Promise(res=>{
+      try{
+        const r=indexedDB.open("lampara",1);
+        r.onupgradeneeded=()=>r.result.createObjectStore("preguntas",{keyPath:"id"});
+        r.onsuccess=()=>{this.db=r.result;res(this.db)};
+        r.onerror=()=>{this.db=null;res(null)};
+      }catch(e){this.db=null;res(null)}
+    });
+  },
+  async tx(mode,fn){
+    const db=await this.open();
+    if(!db)return fn(null);
+    return new Promise((res,rej)=>{const t=db.transaction("preguntas",mode);const st=t.objectStore("preguntas");const rq=fn(st);t.oncomplete=()=>res(rq&&rq.result);t.onerror=()=>rej(t.error)});
+  },
+  async all(){const r=await this.tx("readonly",st=>st?st.getAll():null);return r||[...this.mem.values()]},
+  async put(q){this.mem.set(q.id,q);try{await this.tx("readwrite",st=>st&&st.put(q))}catch(e){toast("No se pudo guardar de forma permanente en este navegador")}},
+  async del(id){this.mem.delete(id);try{await this.tx("readwrite",st=>st&&st.delete(id))}catch(e){}}
+};
+
+/* ---------------- configuración (Perfil) ---------------- */
+const DEF={version:"",versionElegida:false,name:"",reader:"adulto",size:20,theme:"papel",font:"serif",lines:false,
+  qCount:10,qTypes:{banco:true,aleatorias:true,media:true,mias:true},qTimer:0,qGroup:false,
+  pScale:1,pBg:"negro",pRef:true};
+const CFG=(()=>{
+  const saved=store.get("cfg",null);
+  if(saved)return {...DEF,...saved,qTypes:{...DEF.qTypes,...(saved.qTypes||{})}};
+  const old=store.get("state",{}),oldP=store.get("proj",{});
+  return {...DEF,
+    ...(old.size?{size:old.size}:{}),...(old.theme?{theme:old.theme}:{}),...(old.font?{font:old.font}:{}),...(old.lines!=null?{lines:old.lines}:{}),
+    ...(oldP.scale?{pScale:oldP.scale}:{}),...(oldP.bg?{pBg:oldP.bg}:{}),...(oldP.ref!=null?{pRef:oldP.ref}:{})};
+})();
+const saveCfg=()=>store.set("cfg",CFG);
+const S=Object.assign({view:"leer",b:42,c:3},store.get("state",{}));
+const saveState=()=>store.set("state",{view:S.view,b:S.b,c:S.c});
+const STATS=Object.assign({games:0,answered:0,correct:0},store.get("stats",{}));
+
+let BIBLE=null,QUIZ=null,ILLUS={},MINE=[];
+const sel=new Set();
+const MARKS=new Set(store.get("marks",[]));
+let live=null,black=false,projWin=null;
+
+function toast(msg){const t=$("#toast");t.textContent=msg;t.classList.add("show");clearTimeout(toast.t);toast.t=setTimeout(()=>t.classList.remove("show"),2600)}
+const chapterCount=b=>BIBLE[b].length;
+const verseText=(b,c,v)=>(BIBLE[b]?.[c-1]||[])[v-1]||"";
+function ranges(nums){
+  const a=[...nums].sort((x,y)=>x-y),out=[];
+  for(let i=0;i<a.length;i++){let j=i;while(j+1<a.length&&a[j+1]===a[j]+1)j++;out.push(i===j?a[i]:a[i]+"-"+a[j]);i=j}
+  return out.join(", ");
+}
+const refLabel=(b,c,vs)=>`${NAMES[b]} ${c}:${ranges(vs)}`;
+const refOf=r=>r?`${NAMES[r[0]]} ${r[1]}:${r[2]}`:"";
+
+/* datos externos: se editan directo en el repositorio, sin compilar */
+const DATA={versiones:"datos/versiones.json",preguntas:"datos/preguntas.json",ilustraciones:"ilustraciones/"};
+function sampleVerse(){const t=BIBLE?verseText(18,119,105):"";return t?t.replace(/^[A-ZÁÉÍÓÚ]{2,}\.\s+/,""):"Lámpara es á mis pies tu palabra, y lumbrera á mi camino."}
+async function loadVersion(id){
+  const v=VERSIONS.find(x=>x.id===id)||VERSIONS[0]||VER;
+  const data=await getJSON(v.archivo);
+  if(!Array.isArray(data)||data.length!==66)throw new Error(v.archivo+" no tiene los 66 libros");
+  VER=v;BIBLE=data;IDX=null;
+  $("#rail-version").innerHTML=`${esc(v.nombre)}<br>${esc(v.licencia||"")}`;
+  return v;
+}
+async function changeVersion(id){
+  const prev=VER.id;
+  toast("Cargando "+((VERSIONS.find(x=>x.id===id)||{}).nombre||"versión")+"…");
+  try{
+    await loadVersion(id);
+    if(!BIBLE[S.b]||S.c>chapterCount(S.b)){S.b=42;S.c=3}
+    sel.clear();updateSelbar();renderChapter();paint();
+    $$(".size-sample").forEach(p=>p.textContent=sampleVerse());
+    toast("Leyendo "+VER.nombre);
+  }catch(e){
+    console.error(e);CFG.version=prev;saveCfg();syncControls();
+    try{await loadVersion(prev)}catch(_){}
+    toast("No se pudo cargar esa versión. Revisa que el archivo exista en datos/.");
+  }
+}
+async function getJSON(url){const r=await fetch(url);if(!r.ok)throw new Error(url+" respondió "+r.status);return r.json()}
+async function loadIllustrations(){
+  const names=[...new Set([...QUIZ.ninos,...QUIZ.adultos].map(q=>q.img).filter(Boolean))];
+  const out={};
+  await Promise.all(names.map(async n=>{try{const r=await fetch(DATA.ilustraciones+n+".svg");if(r.ok)out[n]=await r.text()}catch(e){}}));
+  return out;
+}
+
+/* =====================================================================
+   Controles de ajustes reutilizables (Perfil, "Aa" y Proyectar)
+   ===================================================================== */
+const seg=(key,opts,num)=>`<div class="seg" data-set="${key}"${num?" data-num":""}>${opts.map(([v,l])=>`<button type="button" data-val="${v}">${l}</button>`).join("")}</div>`;
+const readingControls=()=>`
+  <div class="row-set" style="display:block">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:12px">
+      <span>Tamaño de letra</span>
+      <div class="size-ctl"><button type="button" class="icon-btn" data-step="size:-1" aria-label="Letra más pequeña" style="font-size:.85rem;font-weight:700">A−</button><output data-out="size"></output><button type="button" class="icon-btn" data-step="size:1" aria-label="Letra más grande" style="font-size:1.15rem;font-weight:700">A+</button></div>
+    </div>
+    <input type="range" data-set="size" min="14" max="40" step="1" style="width:100%;margin-top:8px" aria-label="Tamaño de letra">
+    <p class="size-sample" style="font-size:var(--rs)">${esc(sampleVerse())}</p>
+  </div>
+  ${VERSIONS.length>1?`<div class="row-set"><span>Versión de la Biblia</span><select class="text-in" data-set="version" style="width:auto;min-width:200px">${VERSIONS.map(v=>`<option value="${esc(v.id)}">${esc(v.nombre)}</option>`).join("")}</select></div>`:""}
+  <div class="row-set"><span>Tema</span>${seg("theme",[["papel","Claro"],["noche","Noche"]])}</div>
+  <div class="row-set"><span>Letra</span>${seg("font",[["serif","Clásica"],["sans","Moderna"]])}</div>
+  <label class="row-set" style="cursor:pointer"><span>Un versículo por línea</span><span class="switch" style="min-height:0"><input type="checkbox" data-set="lines"></span></label>`;
+const projectionControls=()=>`
+  <div class="row-set" style="display:block"><span class="field-label" style="margin-top:0">Tamaño del texto</span>
+    <div class="size-ctl"><input type="range" data-set="pScale" min="0.6" max="1.5" step="0.05"><output data-out="pScale"></output></div></div>
+  <div class="row-set"><span>Fondo</span>${seg("pBg",[["negro","Negro"],["azul","Azul"],["claro","Claro"]])}</div>
+  <label class="row-set" style="cursor:pointer"><span>Mostrar la cita</span><span class="switch" style="min-height:0"><input type="checkbox" data-set="pRef"></span></label>`;
+
+const getPath=k=>k.split(".").reduce((o,p)=>o?.[p],CFG);
+function setPath(k,v){const ps=k.split(".");let o=CFG;ps.slice(0,-1).forEach(p=>o=o[p]);o[ps.at(-1)]=v}
+function setSetting(key,val){
+  if(key==="size")val=Math.max(14,Math.min(40,Math.round(val)));
+  setPath(key,val);saveCfg();
+  if(["size","theme","font","lines"].includes(key)){applyPrefs();if(key==="lines"&&BIBLE)renderChapter()}
+  if(key.startsWith("p"))paint();
+  if(key==="name"||key==="reader")updateProfileHead();
+  if(key==="version"){CFG.versionElegida=true;saveCfg();if(BIBLE&&val!==VER.id)changeVersion(val)}
+  if(key.startsWith("q")&&S.view==="preguntas"&&Q.phase==="inicio")renderQuiz();
+  syncControls();
+}
+function syncControls(root=document){
+  $$("[data-set]",root).forEach(el=>{
+    const v=getPath(el.dataset.set);
+    if(el.classList.contains("seg"))$$("button",el).forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.val)===String(v)));
+    else if(el.type==="checkbox")el.checked=!!v;
+    else if(document.activeElement!==el)el.value=v;
+  });
+  $$("[data-out]",root).forEach(o=>{const k=o.dataset.out;o.textContent=k==="pScale"?Math.round(CFG.pScale*100)+"%":getPath(k)});
+}
+function bindSettings(){
+  document.addEventListener("input",e=>{
+    const el=e.target.closest("[data-set]");if(!el||el.type==="checkbox"||el.classList.contains("seg"))return;
+    setSetting(el.dataset.set,el.type==="range"?+el.value:el.value);
+  });
+  document.addEventListener("change",e=>{const el=e.target.closest("input[type=checkbox][data-set]");if(el)setSetting(el.dataset.set,el.checked)});
+  document.addEventListener("click",e=>{
+    const b=e.target.closest("[data-set].seg > button");
+    if(b){const s=b.parentElement;setSetting(s.dataset.set,"num" in s.dataset?+b.dataset.val:b.dataset.val);return}
+    const st=e.target.closest("[data-step]");
+    if(st){const [k,d]=st.dataset.step.split(":");setSetting(k,getPath(k)+ +d)}
+    const gv=e.target.closest("[data-go-view]");
+    if(gv){$$("dialog[open]").forEach(d=>d.close());show(gv.dataset.goView)}
+  });
+}
+function applyPrefs(){
+  const d=document.documentElement;
+  d.dataset.theme=CFG.theme;d.dataset.font=CFG.font;d.style.setProperty("--rs",CFG.size+"px");
+  $('meta[name="theme-color"]').content=CFG.theme==="noche"?"#0C1020":"#1B2238";
+}
+
+/* =====================================================================
+   Navegación y lector
+   ===================================================================== */
+function show(view){
+  if(S.view==="preguntas"&&view!=="preguntas")pauseTimer();
+  S.view=view;saveState();
+  $$(".view").forEach(v=>v.hidden=v.id!=="v-"+view);
+  $$(".nav button").forEach(b=>{if(b.dataset.view===view)b.setAttribute("aria-current","page");else b.removeAttribute("aria-current")});
+  $("#selbar").hidden=!(view==="leer"&&sel.size);
+  if(view==="buscar"){renderResults();setTimeout(()=>$("#q").focus({preventScroll:true}),30)}
+  if(view==="preguntas")renderQuiz();
+  if(view==="proyectar")paint();
+  if(view==="perfil")renderProfile();
+  window.scrollTo(0,0);
+}
+function renderChapter(scrollTo){
+  const vs=BIBLE[S.b][S.c-1];
+  $("#title-txt").textContent=`${NAMES[S.b]} ${S.c}`;
+  document.title=`${NAMES[S.b]} ${S.c} · Lámpara`;
+  $("#prev-ch").disabled=S.b===0&&S.c===1;
+  $("#next-ch").disabled=S.b===65&&S.c===chapterCount(65);
+  let h=`<p class="ch-book">${NAMES[S.b]}</p><div class="ch-text${CFG.lines?" lines":""}"><span class="dropnum" aria-hidden="true">${S.c}</span>`,first=true;
+  vs.forEach((t,i)=>{
+    if(!t)return;const n=i+1,k=`${S.b}-${S.c}-${n}`;
+    h+=`<span class="v${first?" first":""}${sel.has(n)?" sel":""}${MARKS.has(k)?" mark":""}" data-v="${n}" id="v-${n}" tabindex="0" role="button" aria-pressed="${sel.has(n)}" aria-label="Versículo ${n}"><sup class="vn">${n}</sup>${esc(t)}</span> `;
+    first=false;
+  });
+  h+="</div>";
+  const prev=stepChapter(-1),next=stepChapter(1);
+  h+=`<nav class="ch-nav" aria-label="Capítulos">${prev?`<button class="btn" data-go="${prev.b},${prev.c}">${NAMES[prev.b]} ${prev.c}</button>`:"<span></span>"}${next?`<button class="btn" data-go="${next.b},${next.c}">${NAMES[next.b]} ${next.c}</button>`:""}</nav>`;
+  if(VER.aviso)h+=`<p class="copyright">${esc(VER.aviso)}</p>`;
+  $("#chapter").innerHTML=h;
+  if(scrollTo){const el=$("#v-"+scrollTo)||$(".v");requestAnimationFrame(()=>{el&&el.scrollIntoView({block:"center"});el&&el.classList.add("flash")})}
+  saveState();
+}
+function stepChapter(d){
+  let b=S.b,c=S.c+d;
+  if(c<1){if(b===0)return null;b--;c=chapterCount(b)}
+  else if(c>chapterCount(b)){if(b===65)return null;b++;c=1}
+  return {b,c};
+}
+function goTo(b,c,v){
+  S.b=b;S.c=c;sel.clear();updateSelbar();
+  if(S.view!=="leer")show("leer");
+  renderChapter(v);if(!v)window.scrollTo(0,0);
+}
+function toggleVerse(el){
+  const n=+el.dataset.v;if(sel.has(n))sel.delete(n);else sel.add(n);
+  el.classList.toggle("sel",sel.has(n));el.setAttribute("aria-pressed",sel.has(n));updateSelbar();
+}
+function updateSelbar(){
+  $("#selbar").hidden=!(sel.size&&S.view==="leer");if(!sel.size)return;
+  $("#sel-ref").textContent=refLabel(S.b,S.c,sel);
+  $("#sel-mark span").textContent=[...sel].every(n=>MARKS.has(`${S.b}-${S.c}-${n}`))?"Quitar":"Marcar";
+}
+function selectionText(){
+  const vs=[...sel].sort((a,b)=>a-b);
+  return `${vs.map(n=>(vs.length>1?n+" ":"")+verseText(S.b,S.c,n)).join(" ")}\n${refLabel(S.b,S.c,vs)} (${VER.nombre})${VER.aviso?"\n"+VER.aviso:""}`;
+}
+async function copyText(txt){
+  try{await navigator.clipboard.writeText(txt);return true}catch(e){
+    const ta=document.createElement("textarea");ta.value=txt;ta.style.position="fixed";ta.style.opacity="0";document.body.appendChild(ta);ta.select();
+    let ok=false;try{ok=document.execCommand("copy")}catch(_){}ta.remove();return ok;
+  }
+}
+
+/* selector de pasaje */
+const pk={step:"libro",b:0,c:1,filter:""};
+function openPicker(){pk.step="libro";pk.b=S.b;pk.c=S.c;pk.filter="";renderPicker();$("#picker").showModal();setTimeout(()=>{const f=$("#book-filter");f&&f.focus()},40)}
+function renderPicker(){
+  const body=$("#picker-body");
+  if(pk.step==="libro"){
+    $("#picker-title").textContent="Elegir libro";
+    body.innerHTML=`<input class="book-filter" id="book-filter" placeholder="Filtrar libros" autocomplete="off" aria-label="Filtrar libros" value="${esc(pk.filter)}"><div id="book-list"></div>`;
+    renderBookList();
+  }else if(pk.step==="capitulo"){
+    $("#picker-title").textContent=NAMES[pk.b];
+    body.innerHTML=`<div class="crumb"><button class="link" data-step-pk="libro">Todos los libros</button></div><div class="nums">${range(1,chapterCount(pk.b)).map(i=>`<button data-c="${i}" class="${pk.b===S.b&&i===S.c?"cur":""}">${i}</button>`).join("")}</div>`;
+  }else{
+    $("#picker-title").textContent=`${NAMES[pk.b]} ${pk.c}`;
+    body.innerHTML=`<div class="crumb"><button class="link" data-step-pk="capitulo">Capítulos de ${NAMES[pk.b]}</button><span style="flex:1"></span><button class="btn primary" data-read>Leer el capítulo</button></div><p class="muted" style="margin:0 0 10px">Elige un versículo para ir directo a él.</p><div class="nums">${BIBLE[pk.b][pk.c-1].map((t,i)=>`<button data-vv="${i+1}" ${t?"":"disabled"}>${i+1}</button>`).join("")}</div>`;
+  }
+  body.scrollTop=0;
+}
+function renderBookList(){
+  const f=norm(pk.filter.trim());
+  const group=(title,from,to)=>{
+    const items=range(from,to).filter(i=>!f||NORM_NAMES[i].includes(f)).map(i=>`<button data-b="${i}" class="${i===S.b?"cur":""}">${NAMES[i]}</button>`);
+    return items.length?`<div class="testament"><h3>${title}</h3><div class="books">${items.join("")}</div></div>`:"";
+  };
+  $("#book-list").innerHTML=(group("Antiguo Testamento",0,38)+group("Nuevo Testamento",39,65))||`<p class="empty">Ningún libro coincide con “${esc(pk.filter)}”.</p>`;
+}
+
+/* =====================================================================
+   Búsqueda
+   ===================================================================== */
+let IDX=null;
+function parseRef(q){
+  const s=norm(q).replace(/\s+/g," ").trim();
+  const m=s.match(/^([123])?\s?([a-z]+)\.?\s*(\d+)?(?:\s*[:.,]\s*(\d+)(?:\s*-\s*(\d+))?)?$/);
+  if(!m||!m[3])return null;
+  const key=(m[1]||"")+m[2],spaced=(m[1]?m[1]+" ":"")+m[2];
+  const name=ALIAS[key]||(!m[1]&&ALIAS[m[2]]);
+  let b=name?NORM_NAMES.indexOf(name):-1;
+  if(b<0)b=NORM_NAMES.findIndex(n=>n.startsWith(spaced)||n.replace(" ","")===key);
+  if(b<0)return null;
+  const c=+m[3];if(c<1||c>chapterCount(b))return null;
+  const max=BIBLE[b][c-1].length;let v1=m[4]?+m[4]:0,v2=m[5]?+m[5]:v1;
+  if(v1>max)return null;if(v2>max)v2=max;if(v2<v1)v2=v1;
+  return {b,c,v1,v2};
+}
+function renderResults(){
+  const q=$("#q").value.trim(),box=$("#results");
+  if(!q){
+    const list=[...MARKS].map(k=>k.split("-").map(Number)).filter(([b,c,v])=>verseText(b,c,v)).sort((x,y)=>x[0]-y[0]||x[1]-y[1]||x[2]-y[2]);
+    box.innerHTML=list.length?`<h2 style="margin-top:6px">Tus versículos marcados</h2>`+list.map(([b,c,v])=>`<button class="result" data-to="${b},${c},${v}"><strong>${NAMES[b]} ${c}:${v}</strong><span>${esc(verseText(b,c,v))}</span></button>`).join(""):`<p class="empty">Los versículos que marques mientras lees aparecerán aquí.</p>`;
+    return;
+  }
+  const ref=parseRef(q);
+  if(ref){
+    const label=ref.v1?refLabel(ref.b,ref.c,range(ref.v1,ref.v2)):`${NAMES[ref.b]} ${ref.c}`;
+    const text=ref.v1?range(ref.v1,ref.v2).map(n=>verseText(ref.b,ref.c,n)).join(" "):verseText(ref.b,ref.c,1);
+    box.innerHTML=`<button class="result" data-to="${ref.b},${ref.c},${ref.v1||0}"><strong>Ir a ${label}</strong><span>${esc(text.length>320?text.slice(0,320)+"…":text)}</span></button>`;
+    return;
+  }
+  if(norm(q).length<3){box.innerHTML=`<p class="empty">Escribe al menos 3 letras.</p>`;return}
+  if(!IDX){IDX=[];BIBLE.forEach((bk,b)=>bk.forEach((ch,c)=>ch.forEach((t,v)=>{if(t)IDX.push([b,c+1,v+1,norm(t),t])})))}
+  const terms=norm(q).split(/\s+/).filter(Boolean),hits=[];let total=0;
+  for(const r of IDX){if(terms.every(t=>r[3].includes(t))){total++;if(hits.length<150)hits.push(r)}}
+  if(!total){box.innerHTML=`<p class="empty">No hay versículos con “${esc(q)}”. Prueba con otra palabra${VER.id==="rv1909"?" o con la ortografía antigua, por ejemplo Bethlehem o Jerusalem":""}.</p>`;return}
+  const hl=(t,n)=>{
+    if(n.length!==t.length)return esc(t);
+    const marks=[];terms.forEach(term=>{let i=n.indexOf(term);while(i>-1){marks.push([i,i+term.length]);i=n.indexOf(term,i+term.length)}});
+    marks.sort((a,b)=>a[0]-b[0]);let out="",pos=0;
+    for(const [a,b] of marks){if(a<pos)continue;out+=esc(t.slice(pos,a))+"<mark>"+esc(t.slice(a,b))+"</mark>";pos=b}
+    return out+esc(t.slice(pos));
+  };
+  box.innerHTML=`<p class="muted" style="margin:0 0 6px">${total.toLocaleString("es-CL")} ${total===1?"versículo":"versículos"}${total>150?", se muestran los primeros 150":""}</p>`+hits.map(([b,c,v,n,t])=>`<button class="result" data-to="${b},${c},${v}"><strong>${NAMES[b]} ${c}:${v}</strong><span>${hl(t,n)}</span></button>`).join("");
+}
+
+/* =====================================================================
+   Multimedia (ilustraciones, fotos, videos, YouTube)
+   ===================================================================== */
+const blobURLs=new Map();
+function blobURL(id,blob){if(!blobURLs.has(id))blobURLs.set(id,URL.createObjectURL(blob));return blobURLs.get(id)}
+function ytId(u){const m=String(u).match(/(?:youtu\.be\/|youtube(?:-nocookie)?\.com\/(?:watch\?(?:.*&)?v=|embed\/|shorts\/|live\/))([\w-]{11})/);return m?m[1]:null}
+const hasMedia=q=>!!(q&&((q.img&&ILLUS[q.img])||q.media));
+const isVideo=q=>!!(q&&q.media&&["video","video-url","youtube"].includes(q.media.kind));
+function mediaKey(q){return q.img?"svg:"+q.img:q.media?q.id+":"+q.media.kind:""}
+function mediaHTML(q,ctx){
+  if(q.img)return ILLUS[q.img]||"";
+  const m=q.media;if(!m)return "";
+  const src=m.blob?blobURL(q.id,m.blob):m.url;
+  if(m.kind==="image"||m.kind==="image-url")return `<img src="${esc(src)}" alt="Imagen de la pregunta">`;
+  if(m.kind==="youtube"){
+    if(ctx==="thumb")return `<img src="https://i.ytimg.com/vi/${m.yt}/mqdefault.jpg" alt="">`;
+    if(ctx==="preview")return `<div class="yt-ph">Video de YouTube</div>`;
+    return `<iframe src="https://www.youtube-nocookie.com/embed/${m.yt}?rel=0&playsinline=1" title="Video de la pregunta" allow="autoplay; encrypted-media; picture-in-picture; fullscreen"></iframe>`;
+  }
+  if(ctx==="thumb"||ctx==="preview")return `<video src="${esc(src)}" muted preload="metadata" playsinline></video>`;
+  return `<video src="${esc(src)}" controls playsinline preload="metadata"></video>`;
+}
+
+/* =====================================================================
+   Proyección
+   ===================================================================== */
+const STAGE_CSS=`
+.stage{position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;background:#000;color:#F2F2EE;font-family:"Iowan Old Style","Palatino Linotype","Book Antiqua",Palatino,Georgia,serif}
+.stage.bg-azul{background:#0E1733;color:#F2F2EE}
+.stage.bg-claro{background:#FFFFFF;color:#1B2238}
+.stage.is-black{background:#000!important}
+.stage.is-black>*{visibility:hidden}
+.stage.has-media{display:grid;grid-template-columns:48% 52%;align-items:center;justify-items:center}
+.p-media{width:100%;height:100%;display:flex;align-items:center;justify-content:center;padding:4% 2% 4% 5%;box-sizing:border-box}
+.p-media svg,.p-media img,.p-media video{max-width:100%;max-height:100%;width:auto;height:auto;border-radius:1.5%;display:block}
+.p-media svg{width:100%}
+.p-media iframe{width:100%;aspect-ratio:16/9;border:0;border-radius:1%}
+.p-media .yt-ph{display:grid;place-items:center;width:100%;aspect-ratio:16/9;background:#1a1a1a;color:#fff;font:600 1rem sans-serif}
+.p-fit{width:88%;text-align:center;line-height:1.28}
+.p-text{margin:0;text-wrap:balance}
+.p-text sup{font-family:"Avenir Next","Segoe UI",sans-serif;font-size:.42em;color:#D8AE56;vertical-align:.95em;margin:0 .12em 0 .3em;line-height:0}
+.bg-claro .p-text sup{color:#9B2335}
+.p-ref{margin:.85em 0 0;font-family:"Avenir Next","Segoe UI",sans-serif;font-size:.42em;color:#D8AE56;letter-spacing:.01em}
+.p-ref span{opacity:.55;margin-left:.7em}
+.bg-claro .p-ref{color:#8A6214}
+.p-idle{font-size:.5em;opacity:.35;font-family:"Avenir Next","Segoe UI",sans-serif}
+.p-q{margin:0 0 .75em;font-family:"Avenir Next","Segoe UI",sans-serif;font-weight:700;line-height:1.2;text-wrap:balance}
+.p-opts{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:.3em;text-align:left;font-family:"Avenir Next","Segoe UI",sans-serif;font-size:.6em}
+.has-media .p-opts{grid-template-columns:1fr}
+.p-opts li{display:flex;align-items:center;gap:.55em;padding:.5em .7em;border-radius:.4em;background:rgba(255,255,255,.09)}
+.bg-claro .p-opts li{background:rgba(27,34,56,.07)}
+.p-opts li.ok{background:#2A7A4B;color:#fff}
+.p-opts li.dim{opacity:.32}
+.p-opts .sh{width:.85em;height:.85em;flex:none;display:inline-block}
+.p-opts .s0{border-radius:50%;background:#4C8FE0}.p-opts .s1{clip-path:polygon(50% 4%,100% 96%,0 96%);background:#E8A93A}.p-opts .s2{background:#46A96A;border-radius:.1em}.p-opts .s3{background:#D8596A;transform:rotate(45deg) scale(.78)}
+.p-opts li.ok .sh{outline:.12em solid #fff}
+`;
+function stageParts(ctx){
+  if(!live)return {key:"",text:`<div class="p-fit"><p class="p-idle">Lámpara</p></div>`};
+  if(live.type==="verse"){
+    const {b,c,v1,v2}=live,multi=v2>v1;
+    const text=range(v1,v2).map(n=>(multi?`<sup>${n}</sup>`:"")+esc(verseText(b,c,n))).join(" ");
+    return {key:"",text:`<div class="p-fit"><p class="p-text">${text}</p>${CFG.pRef?`<p class="p-ref">${NAMES[b]} ${c}:${multi?v1+"-"+v2:v1}<span>${esc(VER.abreviatura)}</span></p>`:""}</div>`};
+  }
+  const q=live.q;
+  const text=`<div class="p-fit" data-kind="quiz"><p class="p-q">${esc(q.q)}</p><ol class="p-opts">${q.o.map((o,i)=>`<li class="${live.reveal?(i===q.a?"ok":"dim"):""}"><span class="sh s${i}"></span>${esc(o)}</li>`).join("")}</ol>${live.reveal&&CFG.pRef&&q.r?`<p class="p-ref">${refOf(q.r)}</p>`:""}</div>`;
+  return hasMedia(q)?{key:mediaKey(q),media:mediaHTML(q,ctx),text}:{key:"",text};
+}
+function fit(root){
+  const f=root.querySelector(":scope > .p-fit");if(!f)return;
+  const media=root.classList.contains("has-media");
+  const W=root.clientWidth*(media?.52:1),H=root.clientHeight;if(!W||!H)return;
+  let s=W*(f.dataset.kind==="quiz"?(media?.075:.052):.058)*CFG.pScale;f.style.fontSize=s+"px";
+  let g=0;while((f.scrollHeight>H*.86||f.scrollWidth>W*.94)&&s>8&&g++<80){s*=.95;f.style.fontSize=s+"px"}
+}
+const projOpen=()=>!!(projWin&&!projWin.closed);
+const ovlOpen=()=>$("#ovl").classList.contains("open");
+function stageTargets(){
+  const t=[[$("#preview"),"preview"]];
+  if(projOpen()){try{t.push([projWin.document.getElementById("stage"),"stage"])}catch(e){projWin=null}}
+  if(ovlOpen())t.push([$("#ovl-stage"),"stage"]);
+  return t;
+}
+function paint(){
+  for(const [t,ctx] of stageTargets()){
+    if(!t)continue;
+    const p=stageParts(ctx);
+    t.className="stage bg-"+CFG.pBg+(black?" is-black":"")+(p.key?" has-media":"");
+    const cur=t.querySelector(":scope > .p-media");
+    if(p.key&&cur&&cur.dataset.key===p.key){const f=t.querySelector(":scope > .p-fit");if(f)f.outerHTML=p.text;else t.insertAdjacentHTML("beforeend",p.text)}
+    else t.innerHTML=(p.key?`<div class="p-media" data-key="${esc(p.key)}">${p.media}</div>`:"")+p.text;
+    fit(t);
+  }
+  const label=!live?"Nada en pantalla":live.type==="verse"?`${NAMES[live.b]} ${live.c}:${live.v2>live.v1?live.v1+"-"+live.v2:live.v1}`:(Q.phase==="pregunta"?`Pregunta ${Q.i+1} de ${Q.list.length}`:"Pregunta en pantalla");
+  $("#live-label").textContent=(black?"Pantalla negra, ":"")+label;
+  $("#p-black").setAttribute("aria-pressed",black);
+  $("#p-black").textContent=black?"Mostrar texto":"Pantalla negra";
+  $("#p-video").hidden=!(live&&live.type==="quiz"&&live.q.media&&live.q.media.kind!=="youtube"&&isVideo(live.q));
+  const on=projOpen()||ovlOpen(),st=$("#proj-status");st.classList.toggle("on",on);
+  st.querySelector("span").textContent=projOpen()?"Ventana del proyector abierta":ovlOpen()?"Pantalla completa activa":"Proyector cerrado";
+  $("#open-win").textContent=projOpen()?"Traer ventana al frente":"Abrir ventana del proyector";
+  remoteSendState();
+}
+function setLive(item){live=item;black=false;paint()}
+function stageVideo(action,fromRemote){
+  if(!fromRemote&&Remote.link&&Remote.role==="control"){remoteSend({t:"cmd",cmd:"video-"+action});toast(action==="pause"?"Video en pausa en la pantalla":"Reproduciendo en la pantalla");return}
+  const vids=[];
+  if(projOpen()){try{const v=projWin.document.querySelector("#stage video");v&&vids.push(v)}catch(e){}}
+  if(ovlOpen()){const v=$("#ovl-stage video");v&&vids.push(v)}
+  if(!vids.length){toast("Abre el proyector para reproducir el video en pantalla");return}
+  vids.forEach(v=>{if(action==="pause")v.pause();else v.play().catch(()=>{v.muted=true;v.play().catch(()=>{});toast("El navegador bloqueó el sonido. Haz clic una vez en la ventana del proyector.")})});
+}
+function nextVerse(n){
+  let {b,c}=live,v=n;const dir=n>=live.v1?1:-1;
+  for(let guard=0;guard<500;guard++){
+    const len=BIBLE[b][c-1].length;
+    if(v>len){if(c<chapterCount(b)){c++;v=1}else if(b<65){b++;c=1;v=1}else return null}
+    else if(v<1){if(c>1)c--;else if(b>0){b--;c=chapterCount(b)}else return null;v=BIBLE[b][c-1].length}
+    else if(!verseText(b,c,v))v+=dir;
+    else return {b,c,v};
+  }
+  return null;
+}
+function projStep(d){
+  if(!live)return;
+  if(live.type==="quiz"){if(d>0){if(Remote.link&&Q.phase!=="pregunta")remoteSend({t:"cmd",cmd:"quiz-next"});else quizFromProjector()}return}
+  const r=nextVerse(d>0?live.v2+1:live.v1-1);
+  if(r)setLive({type:"verse",b:r.b,c:r.c,v1:r.v,v2:r.v});
+}
+function toggleBlack(){black=!black;paint()}
+function projectSelection(){
+  const vs=[...sel].sort((a,b)=>a-b);
+  const contiguous=vs.every((n,i)=>i===0||n===vs[i-1]+1);
+  const chars=vs.reduce((s,n)=>s+verseText(S.b,S.c,n).length,0);
+  const v1=vs[0],v2=contiguous&&chars<=460?vs.at(-1):v1;
+  setLive({type:"verse",b:S.b,c:S.c,v1,v2});
+  if(Remote.link&&Remote.role==="control"){toast(Remote.connected?`En pantalla: ${NAMES[S.b]} ${S.c}:${v2>v1?v1+"-"+v2:v1}`:"Todavía no hay conexión con la pantalla");return}
+  if(projOpen()||ovlOpen())toast(`Proyectando ${NAMES[S.b]} ${S.c}:${v2>v1?v1+"-"+v2:v1}`);
+  else{show("proyectar");toast("Listo. Abre la ventana del proyector o usa pantalla completa.")}
+}
+function handleProjKey(e){
+  const k=e.key;
+  if(["ArrowRight","ArrowDown","PageDown"," "].includes(k)){e.preventDefault();projStep(1)}
+  else if(["ArrowLeft","ArrowUp","PageUp"].includes(k)){e.preventDefault();projStep(-1)}
+  else if(/^[nNbB]$/.test(k))toggleBlack();
+}
+function openProjector(){
+  if(projOpen()){projWin.focus();return}
+  if(window.Capacitor){openOverlay();return}
+  const w=window.open("","lampara_proyector","popup,width=1100,height=640");
+  if(!w){toast("El navegador bloqueó la ventana. Permite ventanas emergentes o usa pantalla completa.");return}
+  w.document.open();
+  w.document.write(`<!doctype html><html lang="es"><head><meta charset="utf-8"><title>Proyector de Lámpara</title><style>html,body{margin:0;height:100%;background:#000;overflow:hidden}.stage{width:100vw;height:100vh}#hint{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);font:14px system-ui,sans-serif;color:#888;background:rgba(0,0,0,.6);padding:6px 12px;border-radius:8px;transition:opacity .6s}body.idle{cursor:none}${STAGE_CSS}</style></head><body><div id="stage" class="stage"></div><div id="hint">Arrastra esta ventana al proyector y haz doble clic para pantalla completa</div></body></html>`);
+  w.document.close();
+  w.addEventListener("keydown",handleProjKey);
+  w.addEventListener("dblclick",e=>{if(e.target.closest("video,iframe"))return;const d=w.document;if(d.fullscreenElement)d.exitFullscreen();else d.documentElement.requestFullscreen&&d.documentElement.requestFullscreen()});
+  w.addEventListener("resize",()=>{try{fit(w.document.getElementById("stage"))}catch(e){}});
+  let idle;w.addEventListener("mousemove",()=>{w.document.body.classList.remove("idle");clearTimeout(idle);idle=setTimeout(()=>w.document.body.classList.add("idle"),2500)});
+  setTimeout(()=>{try{w.document.getElementById("hint").style.opacity=0}catch(e){}},6000);
+  projWin=w;paint();
+}
+function openOverlay(){const o=$("#ovl");o.classList.add("open");paint();if(o.requestFullscreen)o.requestFullscreen().catch(()=>{});flashBar()}
+function closeOverlay(){$("#ovl").classList.remove("open");if(document.fullscreenElement)document.exitFullscreen().catch(()=>{});$("#ovl-stage").innerHTML="";paint()}
+function flashBar(){const o=$("#ovl");o.classList.add("show-bar");clearTimeout(flashBar.t);flashBar.t=setTimeout(()=>o.classList.remove("show-bar"),2500)}
+setInterval(()=>{if(projWin&&projWin.closed){projWin=null;paint()}},1500);
+
+/* =====================================================================
+   Control remoto: un celular maneja la pantalla de otro equipo.
+   Usa Supabase Realtime Broadcast (canales públicos, sin base de datos).
+   Configuración en datos/remoto.json
+   ===================================================================== */
+const SUPABASE_JS="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
+const QR_JS="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js";
+let REMOTE_CFG={supabaseUrl:"",supabaseKey:""};
+const Remote={role:null,code:null,link:null,client:null,connected:false,peerSeen:0,lastSent:"",applying:false,status:"off",timer:null,wake:null,
+  me:Math.random().toString(36).slice(2,10)};
+const remoteReady=()=>!!(REMOTE_CFG.local||(REMOTE_CFG.supabaseUrl&&REMOTE_CFG.supabaseKey));
+const CODE_ALPHA="ABCDEFGHJKMNPQRSTUVWXYZ23456789";
+const newCode=()=>Array.from(crypto.getRandomValues(new Uint8Array(6)),n=>CODE_ALPHA[n%CODE_ALPHA.length]).join("");
+const cleanCode=v=>String(v||"").toUpperCase().replace(/[^A-Z0-9]/g,"");
+const fmtCode=c=>c?c.slice(0,3)+" "+c.slice(3):"";
+/* la sesión remota se guarda por pestaña: sobrevive a recargar, no se mezcla entre pestañas */
+const remoteSession={get(){try{return JSON.parse(sessionStorage.getItem("lampara:remote")||"null")}catch(e){return null}},set(v){try{v?sessionStorage.setItem("lampara:remote",JSON.stringify(v)):sessionStorage.removeItem("lampara:remote")}catch(e){}}};
+const isPhone=()=>matchMedia("(pointer:coarse)").matches&&innerWidth<900;
+
+async function openLink(code,onMsg,onStatus){
+  const topic="lampara-"+code;
+  if(REMOTE_CFG.local){ /* modo de prueba: pestañas del mismo navegador */
+    const bc=new BroadcastChannel(topic);bc.onmessage=e=>onMsg(e.data);setTimeout(()=>onStatus("SUBSCRIBED"),30);
+    return {send:m=>bc.postMessage(m),close:()=>bc.close()};
+  }
+  const {createClient}=await import(SUPABASE_JS);
+  if(!Remote.client)Remote.client=createClient(REMOTE_CFG.supabaseUrl,REMOTE_CFG.supabaseKey,{auth:{persistSession:false,autoRefreshToken:false}});
+  const ch=Remote.client.channel(topic,{config:{broadcast:{self:false}}});
+  ch.on("broadcast",{event:"m"},msg=>onMsg(msg.payload));
+  ch.subscribe(status=>onStatus(status));
+  return {send:m=>ch.send({type:"broadcast",event:"m",payload:m}),close:()=>Remote.client.removeChannel(ch)};
+}
+async function remoteStart(role,code){
+  remoteStop(true);
+  Object.assign(Remote,{role,code,connected:false,peerSeen:0,lastSent:"",status:"conectando"});
+  remoteSession.set({role,code});
+  renderRemote();
+  try{
+    const link=await openLink(code,remoteReceive,st=>{
+      if(Remote.code!==code)return;
+      if(st==="SUBSCRIBED"){Remote.status="en-linea";remoteSend({t:"hola",role});if(role==="pantalla"&&live)remoteSendState(true)}
+      else if(["CHANNEL_ERROR","TIMED_OUT","CLOSED"].includes(st)&&Remote.role){Remote.status="error";Remote.connected=false}
+      renderRemote();
+    });
+    if(Remote.code!==code){link.close();return}
+    Remote.link=link;
+  }catch(e){console.error(e);Remote.status="error";renderRemote();return}
+  clearInterval(Remote.timer);
+  Remote.timer=setInterval(()=>{
+    if(!Remote.link)return;
+    remoteSend({t:"ping",role:Remote.role});
+    const alive=Date.now()-Remote.peerSeen<25000;
+    if(alive!==Remote.connected){Remote.connected=alive;renderRemote();if(S.view==="preguntas")renderQuiz()}
+  },8000);
+  keepAwake();
+}
+function remoteStop(silent){
+  if(Remote.link){try{remoteSend({t:"adios"});Remote.link.close()}catch(e){}}
+  clearInterval(Remote.timer);
+  if(Remote.wake){Remote.wake.release().catch(()=>{});Remote.wake=null}
+  Object.assign(Remote,{role:null,code:null,link:null,connected:false,status:"off"});
+  if(!silent){remoteSession.set(null);renderRemote();paint()}
+}
+function remoteSend(m){if(Remote.link){try{Remote.link.send({...m,from:Remote.me})}catch(e){}}}
+function liveForWire(l){
+  if(!l||l.type!=="quiz")return l;
+  const q=l.q;
+  return {type:"quiz",reveal:l.reveal,q:{id:q.id||null,q:q.q,o:q.o,a:q.a,r:q.r||null,img:q.img||null,media:q.media&&!q.media.blob?q.media:null}};
+}
+function remoteSendState(force){
+  if(!Remote.link||Remote.applying)return;
+  const snap={live:liveForWire(live),black,p:{scale:CFG.pScale,bg:CFG.pBg,ref:CFG.pRef}};
+  const str=JSON.stringify(snap);
+  if(!force&&str===Remote.lastSent)return;
+  Remote.lastSent=str;remoteSend({t:"estado",s:snap});
+}
+function remoteReceive(m){
+  if(!m||m.from===Remote.me||!Remote.role)return;
+  Remote.peerSeen=Date.now();
+  if(!Remote.connected&&m.t!=="adios"){
+    Remote.connected=true;renderRemote();if(S.view==="preguntas")renderQuiz();
+    toast(Remote.role==="pantalla"?"Celular conectado":"Conectado a la pantalla");
+  }
+  if(m.t==="hola"){if(Remote.role==="pantalla")remoteSendState(true);else if(m.role==="pantalla"&&live)remoteSendState(true)}
+  else if(m.t==="estado"&&m.s){
+    Remote.applying=true;
+    live=m.s.live;black=!!m.s.black;
+    if(m.s.p){CFG.pScale=m.s.p.scale;CFG.pBg=m.s.p.bg;CFG.pRef=m.s.p.ref;saveCfg();syncControls()}
+    Remote.lastSent=JSON.stringify(m.s);
+    paint();
+    Remote.applying=false;
+  }
+  else if(m.t==="cmd"){
+    if(m.cmd==="quiz-next")quizFromProjector();
+    else if(m.cmd==="video-play"||m.cmd==="video-pause")stageVideo(m.cmd.slice(6),true);
+  }
+  else if(m.t==="adios"){Remote.connected=false;Remote.peerSeen=0;renderRemote()}
+}
+async function keepAwake(){
+  try{if(Remote.role&&"wakeLock" in navigator&&!document.hidden&&!Remote.wake){Remote.wake=await navigator.wakeLock.request("screen");Remote.wake.addEventListener("release",()=>{Remote.wake=null})}}catch(e){}
+}
+function loadScript(src){return new Promise((res,rej)=>{const sc=document.createElement("script");sc.src=src;sc.onload=res;sc.onerror=rej;document.head.appendChild(sc)})}
+async function drawQR(el,text){
+  try{
+    if(!window.QRCode)await loadScript(QR_JS);
+    if(!el.isConnected)return;
+    el.innerHTML="";new QRCode(el,{text,width:156,height:156,colorDark:"#1B2238",colorLight:"#ffffff",correctLevel:QRCode.CorrectLevel.M});
+    el.title="";
+  }catch(e){el.innerHTML=""}
+}
+function renderRemote(){
+  const box=$("#remote-panel");if(!box)return;
+  $("#v-proyectar").classList.toggle("remote-control",Remote.role==="control");
+  $("#proj-lead").textContent=Remote.role==="control"
+    ?"Estás manejando la pantalla de otro equipo. Avanza con los botones o elige versículos en Leer."
+    :"Conecta el computador al proyector, abre la ventana del proyector y arrástrala a esa pantalla. Desde aquí controlas lo que se ve.";
+  if(!remoteReady()){
+    box.innerHTML=`<h2>Control desde el celular</h2><p class="muted" style="margin:0">Para manejar esta pantalla desde un teléfono falta configurar la conexión en <b>datos/remoto.json</b>. Los pasos están en el README.</p>`;
+    return;
+  }
+  const retry=Remote.status==="error"?`<p class="err" style="margin:8px 0">No se pudo conectar. Revisa tu internet.</p><button class="btn" data-remote="retry">Reintentar</button> `:"";
+  if(Remote.role==="pantalla"){
+    const cls=Remote.status==="error"?"err":Remote.connected?"on":"wait";
+    box.innerHTML=`<h2>Control desde el celular</h2>
+      <div class="status ${cls}"><i></i><span>${Remote.status==="conectando"?"Preparando conexión…":Remote.connected?"Celular conectado":"Esperando el celular"}</span></div>
+      <p class="muted" style="margin:0 0 6px">En el celular abre Lámpara, entra a Proyectar y escribe este código, o escanea el QR con la cámara.</p>
+      <p class="remote-code" aria-label="Código ${Remote.code.split("").join(" ")}">${fmtCode(Remote.code)}</p>
+      <div class="remote-qr" id="remote-qr"></div>
+      ${retry}<button class="btn" data-remote="stop">Dejar de compartir</button>`;
+    drawQR($("#remote-qr"),location.origin+location.pathname+"#control="+Remote.code);
+    return;
+  }
+  if(Remote.role==="control"){
+    const cls=Remote.status==="error"?"err":Remote.connected?"on":"wait";
+    box.innerHTML=`<h2>Control remoto</h2>
+      <div class="status ${cls}"><i></i><span>${Remote.connected?"Conectado a la pantalla "+fmtCode(Remote.code):"Buscando la pantalla "+fmtCode(Remote.code)+"…"}</span></div>
+      <p class="muted" style="margin:0 0 12px">${Remote.connected?"Lo que elijas aquí, en Leer o en Preguntas se mostrará en esa pantalla.":"Revisa que el computador tenga abierta la sección Proyectar con el mismo código."}</p>
+      ${retry}<button class="btn" data-remote="stop">Desconectar</button>`;
+    return;
+  }
+  const share=`<button class="btn ${isPhone()?"":"primary"}" data-remote="share" style="width:100%">Permitir control desde el celular</button>`;
+  const join=`<form class="ref-form remote-form" data-remote-form><input name="code" placeholder="Código de 6 letras" maxlength="7" autocomplete="off" autocapitalize="characters" spellcheck="false" aria-label="Código de la pantalla"><button class="btn ${isPhone()?"primary":""}">Conectar</button></form>`;
+  box.innerHTML=`<h2>Control desde el celular</h2>
+    ${isPhone()
+      ?`<p class="muted" style="margin:0 0 10px">Escribe el código que aparece en el computador para manejar su pantalla desde aquí.</p>${join}<div class="or">o</div>${share}`
+      :`<p class="muted" style="margin:0 0 10px">Muestra un código para manejar esta pantalla desde un teléfono.</p>${share}<div class="or">o controla otra pantalla</div>${join}`}`;
+}
+function bindRemote(){
+  $("#remote-panel").addEventListener("click",e=>{
+    const b=e.target.closest("[data-remote]");if(!b)return;
+    const a=b.dataset.remote;
+    if(a==="share")remoteStart("pantalla",newCode());
+    else if(a==="stop")remoteStop();
+    else if(a==="retry"&&Remote.role)remoteStart(Remote.role,Remote.code);
+  });
+  $("#remote-panel").addEventListener("submit",e=>{
+    const f=e.target.closest("[data-remote-form]");if(!f)return;
+    e.preventDefault();
+    const code=cleanCode(f.code.value);
+    if(code.length!==6){toast("El código tiene 6 letras y números");return}
+    remoteStart("control",code);
+  });
+  $("#remote-panel").addEventListener("input",e=>{if(e.target.name==="code"){const c=cleanCode(e.target.value).slice(0,6);e.target.value=c.length>3?c.slice(0,3)+" "+c.slice(3):c}});
+  document.addEventListener("visibilitychange",()=>{if(!document.hidden&&Remote.link){remoteSend({t:"hola",role:Remote.role});keepAwake()}});
+}
+
+/* =====================================================================
+   Generador de preguntas aleatorias a partir del texto bíblico
+   ===================================================================== */
+const FAMOUS=[[0,1,1],[18,23,1],[18,119,105],[42,3,16],[39,6,9],[49,4,13],[44,8,28],[19,3,5],[42,14,6],[22,40,31],[44,6,23],[57,11,1],[45,13,4],[39,5,14],[39,11,28],[42,8,32],[42,1,1],[39,28,19],[5,1,9],[59,5,7],[61,4,8],[40,16,15],[39,22,39],[47,6,7],[48,6,1],[19,1,7],[42,10,11],[65,3,20],[39,7,12],[43,1,8],[18,37,5],[22,41,10],[45,10,31],[42,15,5],[39,19,14],[41,6,31],[19,22,6],[18,34,8],[42,13,34],[23,33,3],[48,4,32],[57,13,8],[58,1,5],[61,1,9]];
+const VERSE_POOL=[18,19,22,39,40,41,42,43,44,45,47,48,49,57,58,59,61];
+const STOP=new Set("porque entonces cuando sobre todos todas nuestro nuestra vuestro vuestra aquel aquella donde para pues hasta desde entre ellos ellas había sino también tambien están estás estaba mismo misma cual cuales quien quienes este esta esto estos estas sean será serán fueron siendo tiene tienen dijo dice decía hacia contra según delante vosotros nosotros hemos habéis ninguno alguno otra otros otras cosas cosa aquí allí así muchos mucho".split(" "));
+const cleanVerse=t=>t.replace(/^[A-ZÁÉÍÓÚ]{2,}\.\s+/,"").replace(/^(Salmo|Cántico)[^.]*\.\s+/,"");
+const WORD_RE=/(?<![A-Za-zÁÉÍÓÚÑÜáéíóúñüâêîôû])[a-záéíóúñüâêîôû]{5,}(?![A-Za-zÁÉÍÓÚÑÜáéíóúñüâêîôû])/g;
+function wordsOf(t){return [...new Set((cleanVerse(t).match(WORD_RE)||[]).filter(w=>!STOP.has(norm(w))))]}
+function distractorWords(target,avoidRef){
+  const pool=[];
+  for(const r of shuffle(FAMOUS)){if(r===avoidRef)continue;for(const w of wordsOf(verseText(...r)))if(Math.abs(w.length-target.length)<=3&&norm(w)!==norm(target))pool.push(w)}
+  return [...new Set(pool)].slice(0,40);
+}
+function randomVerse(level){
+  if(level==="ninos"||Math.random()<.45)return pick(FAMOUS);
+  for(let i=0;i<40;i++){
+    const b=pick(VERSE_POOL),c=1+Math.floor(Math.random()*chapterCount(b)),vs=BIBLE[b][c-1],v=1+Math.floor(Math.random()*vs.length),t=vs[v-1];
+    if(t&&t.length>=60&&t.length<=190&&!/^(Al Músico|Salmo|Cántico|Masquil|Michtam)/.test(t))return [b,c,v];
+  }
+  return pick(FAMOUS);
+}
+const GEN={
+  completar(level){
+    const r=randomVerse(level),t=cleanVerse(verseText(...r)),ws=wordsOf(t);
+    if(!ws.length)return null;
+    const w=pick(ws),ds=shuffle(distractorWords(w,r)).slice(0,3);
+    if(ds.length<3)return null;
+    const blanked=t.replace(new RegExp(`(^|[^A-Za-zÁÉÍÓÚÑÜáéíóúñüâêîôû])${w}(?![A-Za-zÁÉÍÓÚÑÜáéíóúñüâêîôû])`),"$1_____");
+    return {q:`Completa el versículo: «${blanked}» (${refOf(r)})`,o:[w,...ds],a:0,r,e:`La palabra que falta es «${w}».`};
+  },
+  libro(level){
+    const r=level==="ninos"?pick(FAMOUS):randomVerse(level),t=cleanVerse(verseText(...r));
+    const testament=r[0]>=39?range(39,65):range(0,38);
+    const known=level==="ninos"?[0,1,18,19,22,26,31,39,40,41,42,43,44,45,49,57,65]:VERSE_POOL.concat([0,1,4,5,8,26]);
+    const others=shuffle([...new Set(known.filter(b=>b!==r[0]&&(level==="ninos"||testament.includes(b))))]).slice(0,3);
+    if(others.length<3)return null;
+    return {q:`¿En qué libro está este versículo? «${t.length>170?t.slice(0,170)+"…":t}»`,o:[NAMES[r[0]],...others.map(b=>NAMES[b])],a:0,r,e:`Está en ${refOf(r)}.`};
+  },
+  orden(level){
+    const b=1+Math.floor(Math.random()*63),after=level==="ninos"||Math.random()<.6;
+    const ans=after?b+1:b-1;
+    const opts=shuffle([...new Set([after?b-1:b+1,after?b+2:b-2,b+(after?3:-3),Math.floor(Math.random()*66)].filter(x=>x>=0&&x<=65&&x!==ans&&x!==b))]).slice(0,3);
+    if(opts.length<3)return null;
+    return {q:`¿Qué libro viene ${after?"después":"antes"} de ${NAMES[b]}?`,o:[NAMES[ans],...opts.map(x=>NAMES[x])],a:0,r:[ans,1,1],e:`El orden es ${after?NAMES[b]+", "+NAMES[ans]:NAMES[ans]+", "+NAMES[b]}.`};
+  },
+  testamento(){
+    const b=Math.floor(Math.random()*66),nt=b>=39;
+    return {q:`¿En qué parte de la Biblia está el libro de ${NAMES[b]}?`,o:[nt?"Nuevo Testamento":"Antiguo Testamento",nt?"Antiguo Testamento":"Nuevo Testamento"],a:0,r:[b,1,1],e:`${NAMES[b]} es parte del ${nt?"Nuevo":"Antiguo"} Testamento, que va de ${nt?"Mateo a Apocalipsis":"Génesis a Malaquías"}.`};
+  },
+  capitulos(){
+    const b=pick(range(0,65).filter(x=>chapterCount(x)>=4)),n=chapterCount(b);
+    const opts=shuffle([...new Set([n+1,n-1,n+3,n-3,n+5,Math.round(n*1.5),Math.round(n/2)].filter(x=>x>0&&x!==n))]).slice(0,3);
+    return {q:`¿Cuántos capítulos tiene el libro de ${NAMES[b]}?`,o:[String(n),...opts.map(String)],a:0,r:[b,n,1],e:`${NAMES[b]} tiene ${n} capítulos.`};
+  }
+};
+function generateQuestion(level,seen){
+  const kinds=level==="ninos"?["completar","completar","libro","orden","orden","testamento"]:["completar","completar","libro","libro","orden","capitulos"];
+  for(let i=0;i<30;i++){
+    const k=pick(kinds),q=GEN[k](level);
+    if(!q)continue;
+    const key=k+q.q;if(seen.has(key))continue;seen.add(key);
+    return {...q,kind:"aleatorias",gen:k};
+  }
+  return null;
+}
+
+/* =====================================================================
+   Preguntas
+   ===================================================================== */
+const Q={phase:"inicio",level:"ninos",list:[],i:0,score:0,answer:null,missed:[],deadline:null,remaining:null,recorded:false};
+const STAR=`<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2l-5.7 3.1 1.2-6.4-4.7-4.4 6.4-.8z"/></svg>`;
+const TYPE_LABEL={banco:"de historias",aleatorias:"aleatorias",media:"con imágenes y videos",mias:"creadas por ti"};
+function buildQuizList(level){
+  const T=CFG.qTypes,n=CFG.qCount,seen=new Set();
+  const mine=T.mias?MINE.filter(q=>q.level===level||q.level==="ambos").map(q=>({...q,kind:"mias"})):[];
+  const bank=[
+    ...(T.banco?QUIZ[level].filter(q=>!q.img).map(q=>({...q,kind:"banco"})):[]),
+    ...(T.media?QUIZ[level].filter(q=>q.img).map(q=>({...q,kind:"media"})):[])
+  ];
+  let list=shuffle(mine).slice(0,n);
+  const genTarget=T.aleatorias?(bank.length||mine.length?Math.round(n*.35):n):0;
+  const fromBank=shuffle(bank).slice(0,Math.max(0,n-list.length-genTarget));
+  list=list.concat(fromBank);
+  while(T.aleatorias&&list.length<n){const g=generateQuestion(level,seen);if(!g)break;list.push(g)}
+  if(list.length<n)list=list.concat(shuffle(bank.filter(q=>!list.includes(q))).slice(0,n-list.length));
+  return shuffle(list).map(q=>{const order=shuffle(range(0,q.o.length-1));return {...q,o:order.map(i=>q.o[i]),a:order.indexOf(q.a)}});
+}
+function startQuiz(level){
+  if(!Object.values(CFG.qTypes).some(Boolean)){toast("Activa al menos un tipo de preguntas en Perfil");return}
+  const list=buildQuizList(level);
+  if(!list.length){toast("No hay preguntas con los tipos elegidos. Revisa Perfil.");return}
+  Object.assign(Q,{level,phase:"pregunta",list,i:0,score:0,answer:null,missed:[],deadline:null,remaining:null,recorded:false});
+  renderQuiz();syncQuizProjector();
+}
+function syncQuizProjector(){if(CFG.qGroup&&Q.phase==="pregunta")setLive({type:"quiz",q:Q.list[Q.i],reveal:Q.answer!==null})}
+function answer(i){
+  if(Q.answer!==null)return;
+  stopTimer();
+  const q=Q.list[Q.i];Q.answer=i;
+  if(i===q.a)Q.score++;else if(i!==-1)Q.missed.push(q);
+  renderQuiz(true);syncQuizProjector();
+}
+function nextQuestion(){
+  if(Q.i+1>=Q.list.length){Q.phase="fin";if(live&&live.type==="quiz"){live=null;paint()}}
+  else{Q.i++;Q.answer=null;Q.deadline=null;Q.remaining=null}
+  renderQuiz();syncQuizProjector();window.scrollTo(0,0);
+}
+function quizFromProjector(){if(Q.phase!=="pregunta")return;if(Q.answer===null)answer(-1);else nextQuestion()}
+let timerInt=null;
+function stopTimer(){clearInterval(timerInt);timerInt=null;Q.deadline=null;Q.remaining=null}
+function pauseTimer(){if(Q.deadline){Q.remaining=Math.max(0,Q.deadline-Date.now());clearInterval(timerInt);timerInt=null;Q.deadline=null}}
+function runTimer(){
+  clearInterval(timerInt);
+  if(!CFG.qTimer||Q.phase!=="pregunta"||Q.answer!==null)return;
+  const total=CFG.qTimer*1000;
+  if(!Q.deadline)Q.deadline=Date.now()+(Q.remaining??total);
+  Q.remaining=null;
+  const tick=()=>{
+    const left=Q.deadline-Date.now(),bar=$("#q-timer");
+    if(bar){bar.firstElementChild.style.transform=`scaleX(${Math.max(0,left/total)})`;bar.classList.toggle("low",left<5000);bar.setAttribute("aria-valuenow",Math.ceil(Math.max(0,left)/1000))}
+    if(left<=0){clearInterval(timerInt);timerInt=null;answer(-2)}
+  };
+  tick();timerInt=setInterval(tick,250);
+}
+function typesSentence(){
+  const on=Object.keys(TYPE_LABEL).filter(k=>CFG.qTypes[k]).map(k=>TYPE_LABEL[k]);
+  if(!on.length)return "No hay tipos de preguntas activos.";
+  const list=on.length>1?on.slice(0,-1).join(", ")+" y "+on.at(-1):on[0];
+  return `${CFG.qCount} preguntas ${list}, ${CFG.qTimer?CFG.qTimer+" segundos por pregunta":"sin límite de tiempo"}${CFG.qGroup?", mostradas en el proyector":""}.`;
+}
+function renderQuiz(justAnswered){
+  const box=$("#quiz"),kids=Q.level==="ninos";
+  box.className="page quiz"+(Q.phase!=="inicio"&&kids?" kids":"");
+  if(Q.phase==="inicio"){
+    const kidsBtn=`<button class="level kids" data-level="ninos"><svg class="deco" viewBox="0 0 120 120" aria-hidden="true"><path d="M78 18l7 15 16 2-12 11 3 16-14-8-14 8 3-16-12-11 16-2z" fill="#F3C54B"/><circle cx="36" cy="30" r="7" fill="#fff" opacity=".35"/><path d="M98 76l3 7 8 1-6 5 2 8-7-4-7 4 2-8-6-5 8-1z" fill="#fff" opacity=".55"/></svg><strong>Niños</strong><span>Historias conocidas, dibujos, figuras de colores y estrellas de premio.</span><small>Jugar</small></button>`;
+    const adultBtn=`<button class="level adults" data-level="adultos"><strong>Adultos</strong><span>Personajes, lugares, citas y detalles para estudiar en familia o en grupo.</span><small>Jugar</small></button>`;
+    box.innerHTML=`<h1>Preguntas</h1><p class="lead">${CFG.name?`Hola, ${esc(CFG.name)}. `:""}Elige quién juega. Cada respuesta trae el versículo para leerlo.</p>
+      <div class="levels">${CFG.reader==="nino"?kidsBtn+adultBtn:adultBtn+kidsBtn}</div>
+      <p class="q-config">${typesSentence()} <button class="link" data-go-view="perfil">Cambiar en Perfil</button></p>`;
+    return;
+  }
+  if(Q.phase==="fin"){
+    const n=Q.list.length,pct=Q.score/n;
+    if(!Q.recorded){STATS.games++;STATS.answered+=n;STATS.correct+=Q.score;store.set("stats",STATS);Q.recorded=true}
+    const who=CFG.name?`, ${esc(CFG.name)}`:"";
+    const msg=pct===1?(kids?`¡Todas correctas${who}! Eres un gran explorador de la Biblia.`:"Todas correctas. Excelente conocimiento."):pct>=.7?(kids?`¡Muy bien${who}! Sigue leyendo y aprendiendo.`:"Muy buen resultado."):pct>=.4?(kids?"¡Buen intento! Vamos por más estrellas.":"Buen avance. Repasa los pasajes de abajo."):(kids?"¡Sigue practicando, cada vez aprenderás más!":"Los pasajes de abajo son un buen punto de partida para estudiar.");
+    box.innerHTML=`<div class="q-end">${kids?`<h1>¡Ganaste ${Q.score} ${Q.score===1?"estrella":"estrellas"}!</h1><div class="stars" aria-label="${Q.score} de ${n} estrellas">${range(0,n-1).map(i=>STAR.replace("<svg",`<svg class="${i<Q.score?"on":""}"`)).join("")}</div>`:`<h1>Resultado</h1><p class="big-score">${Q.score}<span class="muted" style="font-size:.45em"> de ${n}</span></p>`}
+      <p class="lead" style="margin:0 auto 22px">${msg}</p>
+      <div class="row" style="justify-content:center"><button class="btn" data-q="menu">Elegir otro nivel</button><button class="btn primary" data-q="again">Jugar otra vez</button></div></div>
+      ${Q.missed.length?`<div class="missed"><h2>Para repasar</h2><ul>${Q.missed.map(q=>`<li>${esc(q.q)} <strong>${esc(q.o[q.a])}</strong>.${q.r?` <button class="link" data-to="${q.r.join(",")}">${refOf(q.r)}</button>`:""}</li>`).join("")}</ul></div>`:""}`;
+    return;
+  }
+  const q=Q.list[Q.i],done=Q.answer!==null,n=Q.list.length;
+  const good=["¡Muy bien!","¡Excelente!","¡Lo lograste!","¡Correcto!"];
+  const verdict=Q.answer===-1?`<p class="verdict">La respuesta es: ${esc(q.o[q.a])}</p>`
+    :Q.answer===-2?`<p class="verdict bad">${kids?"¡Se acabó el tiempo!":"Se acabó el tiempo."} La respuesta es: ${esc(q.o[q.a])}</p>`
+    :Q.answer===q.a?`<p class="verdict ok">${kids?good[Q.i%good.length]:"Correcto."}</p>`
+    :`<p class="verdict bad">${kids?"¡Casi!":"Incorrecto."} La respuesta es: ${esc(q.o[q.a])}</p>`;
+  const verse=q.r?verseText(...q.r):"";
+  const showVerse=verse&&q.gen!=="orden"&&q.gen!=="testamento"&&q.gen!=="capitulos";
+  const groupOn=CFG.qGroup&&(projOpen()||ovlOpen()||Remote.connected);
+  box.innerHTML=`<div class="q-top">
+      <button class="link" data-q="menu">Salir</button>
+      <div class="q-progress" role="progressbar" aria-label="Progreso" aria-valuemin="0" aria-valuemax="${n}" aria-valuenow="${Q.i+(done?1:0)}"><span style="width:${(Q.i+(done?1:0))/n*100}%"></span></div>
+      <span class="q-count">${Q.i+1} de ${n}</span>
+      <span class="q-score${justAnswered&&Q.answer===q.a?" pop":""}" aria-label="${Q.score} correctas">${STAR}${Q.score}</span>
+    </div>
+    ${CFG.qTimer&&!done?`<div class="q-timer" id="q-timer" role="timer" aria-label="Segundos restantes"><span></span></div>`:""}
+    ${hasMedia(q)?`<figure class="q-media${isVideo(q)?" wide":""}" style="margin-top:0">${mediaHTML(q,"quiz")}</figure>`:""}
+    ${groupOn&&isVideo(q)&&q.media.kind!=="youtube"?`<div class="media-note"><span class="muted">Video en el proyector</span><button class="btn" data-video="play">Reproducir</button><button class="btn" data-video="pause">Pausar</button></div>`:""}
+    <h2 class="q-text">${esc(q.q)}</h2>
+    <div class="q-opts">${q.o.map((o,i)=>{
+      const cls=done?(i===q.a?"ok":i===Q.answer?"bad":"dim"):"";
+      const res=done?(i===q.a?"Correcta":i===Q.answer?"Tu respuesta":""):"";
+      return `<button class="q-opt ${cls}" data-i="${i}" ${done?"disabled":""}>${kids?`<span class="shape s${i}" aria-hidden="true"></span>`:`<span class="letter" aria-hidden="true">${"ABCD"[i]}</span>`}<span>${esc(o)}</span>${res?`<span class="res">${res}</span>`:""}</button>`}).join("")}</div>
+    ${done?`<div class="q-feedback" role="status">${verdict}${q.e?`<p style="margin:0">${esc(q.e)}</p>`:""}
+      ${showVerse?`<blockquote class="q-verse"><p>${esc(verse)}</p><cite>${refOf(q.r)}</cite></blockquote>`:""}
+      <div class="row">${q.r?`<button class="btn" data-to="${q.r.join(",")}">Leer el capítulo</button>`:""}<button class="btn primary" data-q="next" id="q-next">${Q.i+1>=n?"Ver resultado":"Siguiente pregunta"}</button></div></div>`
+      :(CFG.qGroup?`<div class="row"><button class="btn" data-q="reveal">Revelar respuesta</button></div>`:"")}`;
+  if(done)setTimeout(()=>{const b=$("#q-next");b&&b.focus({preventScroll:true})},30);
+  else runTimer();
+}
+
+/* =====================================================================
+   Perfil
+   ===================================================================== */
+function updateProfileHead(){
+  const av=$("#avatar");if(!av)return;
+  av.innerHTML=CFG.name.trim()?esc(CFG.name.trim()[0].toUpperCase()):`<svg viewBox="0 0 64 64" aria-hidden="true"><path d="M32 8c8 10 12 17 12 24a12 12 0 0 1-24 0c0-7 4-14 12-24z" fill="#D8AE56"/><rect x="17" y="49" width="30" height="5" rx="2.5" fill="#D8AE56"/></svg>`;
+}
+function renderProfile(){
+  const pct=STATS.answered?Math.round(STATS.correct/STATS.answered*100):0;
+  $("#perfil").innerHTML=`<h1>Perfil</h1>
+  <div class="prof-head"><div class="avatar" id="avatar"></div>
+    <div class="prof-fields"><input class="text-in" data-set="name" placeholder="Tu nombre" aria-label="Tu nombre" maxlength="40">
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap"><span class="muted">Quién usa la app</span>${seg("reader",[["nino","Niño"],["adulto","Adulto"]])}</div></div>
+  </div>
+  <div class="stats"><span><b>${STATS.games}</b>partidas jugadas</span><span><b>${STATS.correct}</b>respuestas correctas${STATS.answered?` (${pct}%)`:""}</span><span><b>${MARKS.size}</b>versículos marcados</span></div>
+
+  <section class="panel prof-section"><h2>Lectura</h2><p class="muted">Se aplica al leer la Biblia en este equipo.</p>${readingControls()}<p class="hint" style="margin-top:10px">${esc(VER.nombre)}. ${esc(VER.aviso||VER.licencia||"")}</p></section>
+
+  <section class="panel prof-section"><h2>Preguntas</h2><p class="muted">Elige qué tipo de preguntas aparecen al jugar.</p>
+    <div class="types">
+      <label class="check"><input type="checkbox" data-set="qTypes.banco"><span>Historias y personajes<small>${QUIZ.ninos.filter(q=>!q.img).length+QUIZ.adultos.filter(q=>!q.img).length} preguntas escritas, cada una con su versículo.</small></span></label>
+      <label class="check"><input type="checkbox" data-set="qTypes.aleatorias"><span>Aleatorias del texto bíblico<small>Completar versículos, adivinar el libro, orden de los libros y más. Se crean al momento, así que no se repiten igual.</small></span></label>
+      <label class="check"><input type="checkbox" data-set="qTypes.media"><span>Con imágenes y videos<small>${QUIZ.ninos.filter(q=>q.img).length+QUIZ.adultos.filter(q=>q.img).length} preguntas con dibujos de historias bíblicas.</small></span></label>
+      <label class="check"><input type="checkbox" data-set="qTypes.mias"><span>Mis preguntas<small>Las que crees abajo con tus fotos o videos. Siempre aparecen primero.</small></span></label>
+    </div>
+    <div class="row-set"><span>Preguntas por partida</span>${seg("qCount",[[5,"5"],[10,"10"],[15,"15"],[20,"20"]],true)}</div>
+    <div class="row-set"><span>Tiempo por pregunta</span>${seg("qTimer",[[0,"Sin límite"],[20,"20 s"],[40,"40 s"]],true)}</div>
+    <label class="row-set" style="cursor:pointer"><span>Jugar en grupo con el proyector<small>La pregunta, la imagen y la respuesta se muestran en la pantalla del proyector.</small></span><span class="switch" style="min-height:0"><input type="checkbox" data-set="qGroup"></span></label>
+  </section>
+
+  <section class="panel prof-section" id="mine-section"><h2>Mis preguntas con fotos o videos</h2>
+    <p class="muted">Crea preguntas con una foto de tu teléfono, un video o un enlace de YouTube. Se guardan en este equipo.</p>
+    <div class="mine" id="mine-list"></div>
+    <div class="row" style="justify-content:flex-start;margin-top:0">
+      <button class="btn primary" data-mine="new">Agregar pregunta</button>
+      <button class="btn" data-mine="export" ${MINE.length?"":"disabled"}>Exportar</button>
+      <span class="btn file-btn">Importar<input type="file" accept="application/json,.json" data-mine="import" aria-label="Importar preguntas"></span>
+    </div>
+    <p class="hint">Usa Exportar e Importar para pasar tus preguntas del teléfono al computador de la iglesia.</p>
+  </section>
+
+  <section class="panel prof-section"><h2>Proyección</h2><p class="muted">Cómo se ve el texto en la pantalla del proyector.</p>${projectionControls()}</section>
+
+  <section class="panel prof-section"><h2>Datos</h2>
+    <div class="row" style="justify-content:flex-start;margin-top:4px">
+      <button class="btn" data-reset="marks">Borrar versículos marcados</button>
+      <button class="btn" data-reset="stats">Reiniciar estadísticas</button>
+      <button class="btn danger" data-reset="cfg">Restablecer ajustes</button>
+    </div>
+  </section>`;
+  updateProfileHead();renderMineList();syncControls($("#perfil"));
+}
+function renderMineList(){
+  const box=$("#mine-list");if(!box)return;
+  if(!MINE.length){box.innerHTML=`<p class="empty" style="padding:6px 0">Todavía no has creado preguntas.</p>`;return}
+  const lv={ninos:"Niños",adultos:"Adultos",ambos:"Niños y adultos"};
+  const md={image:"Foto","image-url":"Foto",video:"Video","video-url":"Video",youtube:"YouTube"};
+  box.innerHTML=MINE.map(q=>`<div class="mine-item"><div class="thumb">${q.media?mediaHTML(q,"thumb"):`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="width:22px;height:22px"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.3a2.6 2.6 0 0 1 5 .9c0 1.7-2.5 2.2-2.5 3.8M12 17.2h.01"/></svg>`}</div>
+    <div class="t"><b>${esc(q.q)}</b><small>${lv[q.level]}${q.media?", "+md[q.media.kind]:""}${q.r?", "+refOf(q.r):""}</small></div>
+    <button class="icon-btn" data-mine="edit" data-id="${q.id}" aria-label="Editar pregunta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M4 20h4L19 9l-4-4L4 16z"/></svg></button>
+    <button class="icon-btn" data-mine="delete" data-id="${q.id}" aria-label="Eliminar pregunta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 7h14M10 7V4h4v3M7 7l1 13h8l1-13"/></svg></button></div>`).join("");
+}
+
+/* editor de preguntas propias */
+let ED=null;
+function openEditor(id){
+  const q=id?MINE.find(x=>x.id===id):null;
+  ED=q?{id:q.id,level:q.level,q:q.q,o:[...q.o,"","","",""].slice(0,4),a:q.a,kind:q.media?(q.media.kind.startsWith("image")?"image":"video"):"none",media:q.media||null,ref:q.r?refOf(q.r):"",e:q.e||"",created:q.created}
+    :{id:null,level:CFG.reader==="nino"?"ninos":"ambos",q:"",o:["","","",""],a:0,kind:"none",media:null,ref:"",e:""};
+  $("#qedit-title").textContent=q?"Editar pregunta":"Nueva pregunta";
+  renderEditor();$("#qedit").showModal();
+}
+function readEditor(){
+  const b=$("#qedit-body");if(!b.querySelector("#ed-q"))return;
+  ED.q=$("#ed-q").value;ED.o=$$(".ed-opt",b).map(i=>i.value);
+  const r=$("input[name=ed-a]:checked",b);ED.a=r?+r.value:0;
+  ED.ref=$("#ed-ref").value;ED.e=$("#ed-e").value;
+}
+function renderEditor(){
+  const lvSeg=`<div class="seg" id="ed-level">${[["ninos","Niños"],["adultos","Adultos"],["ambos","Ambos"]].map(([v,l])=>`<button type="button" data-lv="${v}" aria-pressed="${ED.level===v}">${l}</button>`).join("")}</div>`;
+  const kindSeg=`<div class="seg" id="ed-kind">${[["none","Sin multimedia"],["image","Foto"],["video","Video"]].map(([v,l])=>`<button type="button" data-kind="${v}" aria-pressed="${ED.kind===v}">${l}</button>`).join("")}</div>`;
+  let mediaBlock="";
+  if(ED.kind!=="none"){
+    const img=ED.kind==="image";
+    const urlVal=ED.media&&!ED.media.blob?(ED.media.kind==="youtube"?"https://youtu.be/"+ED.media.yt:ED.media.url):"";
+    mediaBlock=`<div style="margin-top:12px">
+      <span class="btn file-btn">${img?"Elegir foto":"Elegir video"}<input type="file" id="ed-file" accept="${img?"image/*":"video/*"}" aria-label="${img?"Elegir foto":"Elegir video"}"></span>
+      <div class="or">o pega un enlace</div>
+      <input class="text-in" id="ed-url" type="url" placeholder="${img?"https://… enlace de la imagen":"Enlace de YouTube o de un video .mp4"}" value="${esc(urlVal)}">
+      ${!img?`<p class="hint">Para videos largos conviene YouTube: el archivo no ocupa espacio en el equipo.</p>`:""}
+      <div id="ed-prev"></div>
+    </div>`;
+  }
+  $("#qedit-body").innerHTML=`<p class="err" id="ed-err" role="alert" hidden></p>
+    <div class="ed-field"><span class="lbl">Para quién</span>${lvSeg}</div>
+    <div class="ed-field"><label for="ed-q">Pregunta</label><textarea class="text-in" id="ed-q" maxlength="220" placeholder="¿Qué historia muestra la foto?">${esc(ED.q)}</textarea></div>
+    <div class="ed-field"><span class="lbl">Respuestas</span><p class="hint" style="margin:0 0 8px">Marca la correcta. Puedes dejar vacías hasta dos.</p>
+      ${ED.o.map((o,i)=>`<div class="ans"><input type="radio" name="ed-a" value="${i}" ${ED.a===i?"checked":""} aria-label="Respuesta ${i+1} es la correcta"><input class="text-in ed-opt" value="${esc(o)}" maxlength="90" placeholder="Respuesta ${i+1}" aria-label="Respuesta ${i+1}"></div>`).join("")}</div>
+    <div class="ed-field"><span class="lbl">Foto o video</span>${kindSeg}${mediaBlock}</div>
+    <div class="ed-field"><label for="ed-ref">Cita bíblica, opcional</label><input class="text-in" id="ed-ref" placeholder="Juan 3:16" value="${esc(ED.ref)}"></div>
+    <div class="ed-field"><label for="ed-e">Explicación, opcional</label><textarea class="text-in" id="ed-e" maxlength="300" placeholder="Se muestra después de responder">${esc(ED.e)}</textarea></div>
+    <div class="row"><button type="button" class="btn" data-close>Cancelar</button><button type="button" class="btn primary" id="ed-save">Guardar pregunta</button></div>`;
+  updatePreview();
+}
+function setErr(msg){const e=$("#ed-err");if(!e)return;e.textContent=msg||"";e.hidden=!msg;if(msg)e.scrollIntoView({block:"nearest"})}
+function updatePreview(){
+  const box=$("#ed-prev");if(!box)return;
+  $$("video",box).forEach(v=>v.pause());
+  box.innerHTML=ED.media?`<div class="ed-media-prev">${mediaHTML({id:"editor-"+(ED.previewStamp||0),media:ED.media},"quiz")}</div><button type="button" class="link" id="ed-clear-media" style="margin-top:6px">Quitar ${ED.kind==="image"?"foto":"video"}</button>`:"";
+}
+function applyUrl(u){
+  u=(u||"").trim();
+  if(!u){if(ED.media&&!ED.media.blob)ED.media=null;updatePreview();return ""}
+  if(!/^https?:\/\//i.test(u))return "El enlace debe comenzar con https://";
+  const yt=ytId(u);
+  if(ED.kind==="image"&&yt)return "Ese es un enlace de video. Elige la opción Video.";
+  ED.media=ED.kind==="video"?(yt?{kind:"youtube",yt}:{kind:"video-url",url:u}):{kind:"image-url",url:u};
+  ED.previewStamp=Date.now();updatePreview();return "";
+}
+async function shrinkImage(file){
+  if(!/^image\/(jpeg|png|webp|heic|heif)/.test(file.type)||file.size<500000)return file;
+  try{
+    const bmp=await createImageBitmap(file),k=Math.min(1,1600/Math.max(bmp.width,bmp.height));
+    const c=document.createElement("canvas");c.width=Math.round(bmp.width*k);c.height=Math.round(bmp.height*k);
+    c.getContext("2d").drawImage(bmp,0,0,c.width,c.height);
+    return await new Promise(r=>c.toBlob(b=>r(b||file),"image/jpeg",.86));
+  }catch(e){return file}
+}
+function bindEditor(){
+  const body=$("#qedit-body");
+  body.addEventListener("click",async e=>{
+    const lv=e.target.closest("[data-lv]");if(lv){readEditor();ED.level=lv.dataset.lv;renderEditor();return}
+    const kd=e.target.closest("[data-kind]");if(kd){readEditor();if(ED.kind!==kd.dataset.kind){ED.kind=kd.dataset.kind;ED.media=null}renderEditor();return}
+    if(e.target.id==="ed-clear-media"){ED.media=null;const u=$("#ed-url");if(u)u.value="";updatePreview();return}
+    if(e.target.id==="ed-save"){readEditor();await saveEditor()}
+  });
+  body.addEventListener("change",async e=>{
+    if(e.target.id==="ed-file"){
+      const f=e.target.files[0];if(!f)return;
+      if(ED.kind==="video"&&f.size>150e6){setErr(`El video pesa ${Math.round(f.size/1e6)} MB. Usa uno de menos de 150 MB o un enlace de YouTube.`);return}
+      const blob=ED.kind==="image"?await shrinkImage(f):f;
+      ED.media={kind:ED.kind,blob};ED.previewStamp=Date.now();
+      const u=$("#ed-url");if(u)u.value="";setErr("");updatePreview();
+    }
+    if(e.target.id==="ed-url"){const v=e.target.value;setTimeout(()=>{if($("#qedit").open&&$("#ed-url"))setErr(applyUrl(v))},250)}
+  });
+  let urlT;
+  body.addEventListener("input",e=>{if(e.target.id==="ed-url"){clearTimeout(urlT);const v=e.target.value;urlT=setTimeout(()=>{if(/^https?:\/\/\S+\.\S+/.test(v.trim()))setErr(applyUrl(v))},600)}});
+}
+async function saveEditor(){
+  const u=$("#ed-url");
+  if(u&&u.value.trim()&&!(ED.media&&ED.media.blob)){const er=applyUrl(u.value);if(er)return setErr(er)}
+  const opts=ED.o.map(s=>s.trim());
+  if(!ED.q.trim())return setErr("Escribe la pregunta.");
+  if(!opts[ED.a])return setErr("La respuesta marcada como correcta está vacía.");
+  const filled=opts.map((o,i)=>({o,i})).filter(x=>x.o);
+  if(filled.length<2)return setErr("Escribe al menos dos respuestas.");
+  if(ED.kind!=="none"&&!ED.media)return setErr(ED.kind==="image"?"Elige una foto o pega un enlace.":"Elige un video o pega un enlace.");
+  let r=null;
+  if(ED.ref.trim()){const p=parseRef(ED.ref);if(!p)return setErr("No reconozco la cita. Escríbela como Juan 3:16.");r=[p.b,p.c,p.v1||1]}
+  const rec={id:ED.id||"q"+Date.now().toString(36)+Math.random().toString(36).slice(2,6),level:ED.level,q:ED.q.trim(),o:filled.map(x=>x.o),a:filled.findIndex(x=>x.i===ED.a),media:ED.kind==="none"?null:ED.media,r,e:ED.e.trim(),created:ED.created||Date.now()};
+  blobURLs.delete(rec.id);
+  await DB.put(rec);
+  const i=MINE.findIndex(x=>x.id===rec.id);if(i>=0)MINE[i]=rec;else MINE.unshift(rec);
+  $("#qedit").close();renderProfile();toast("Pregunta guardada");
+}
+const blobToDataURL=b=>new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result);r.onerror=rej;r.readAsDataURL(b)});
+async function exportMine(){
+  const out=[];
+  for(const q of MINE){const m=q.media?{...q.media}:null;if(m&&m.blob){m.data=await blobToDataURL(m.blob);delete m.blob}out.push({...q,media:m})}
+  const blob=new Blob([JSON.stringify({app:"lampara",version:1,preguntas:out})],{type:"application/json"});
+  const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=`lampara-preguntas-${new Date().toISOString().slice(0,10)}.json`;
+  document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},1000);
+}
+async function importMine(file){
+  try{
+    const data=JSON.parse(await file.text());
+    if(data.app!=="lampara"||!Array.isArray(data.preguntas))throw new Error("formato");
+    let n=0;
+    for(const q of data.preguntas){
+      if(!q.q||!Array.isArray(q.o))continue;
+      if(q.media&&q.media.data){q.media.blob=await (await fetch(q.media.data)).blob();delete q.media.data}
+      q.id=q.id||"q"+Date.now().toString(36)+n;
+      await DB.put(q);const i=MINE.findIndex(x=>x.id===q.id);if(i>=0)MINE[i]=q;else MINE.push(q);n++;
+    }
+    renderProfile();toast(`${n} ${n===1?"pregunta importada":"preguntas importadas"}`);
+  }catch(e){toast("El archivo no es una exportación de Lámpara")}
+}
+
+/* =====================================================================
+   Eventos
+   ===================================================================== */
+function bind(){
+  bindSettings();bindEditor();
+  $$(".nav button").forEach(b=>b.addEventListener("click",()=>show(b.dataset.view)));
+  $("#prev-ch").onclick=()=>{const p=stepChapter(-1);p&&goTo(p.b,p.c)};
+  $("#next-ch").onclick=()=>{const p=stepChapter(1);p&&goTo(p.b,p.c)};
+  $("#title-btn").onclick=openPicker;
+  $("#aa-btn").onclick=()=>{syncControls($("#aa"));$("#aa").showModal()};
+  $$("dialog").forEach(d=>d.addEventListener("click",e=>{if(e.target===d||e.target.closest("[data-close]"))d.close()}));
+  $("#qedit").addEventListener("close",()=>{$$("#qedit video").forEach(v=>v.pause());$("#qedit-body").innerHTML=""});
+
+  $("#chapter").addEventListener("click",e=>{
+    const go=e.target.closest("[data-go]");if(go){const [b,c]=go.dataset.go.split(",").map(Number);goTo(b,c);return}
+    const v=e.target.closest(".v");if(v&&!getSelection().toString())toggleVerse(v);
+  });
+  $("#chapter").addEventListener("keydown",e=>{const v=e.target.closest(".v");if(v&&(e.key==="Enter"||e.key===" ")){e.preventDefault();toggleVerse(v)}});
+  $("#sel-clear").onclick=()=>{sel.clear();$$("#chapter .v.sel").forEach(el=>{el.classList.remove("sel");el.setAttribute("aria-pressed","false")});updateSelbar()};
+  $("#sel-copy").onclick=async()=>toast(await copyText(selectionText())?"Copiado":"No se pudo copiar");
+  if(navigator.share){$("#sel-share").hidden=false;$("#sel-share").onclick=()=>navigator.share({text:selectionText()}).catch(()=>{})}
+  $("#sel-mark").onclick=()=>{
+    const keys=[...sel].map(n=>`${S.b}-${S.c}-${n}`),all=keys.every(k=>MARKS.has(k));
+    keys.forEach(k=>all?MARKS.delete(k):MARKS.add(k));store.set("marks",[...MARKS]);
+    keys.forEach(k=>{const el=$("#v-"+k.split("-")[2]);el&&el.classList.toggle("mark",!all)});
+    toast(all?"Marca quitada":"Versículo marcado");updateSelbar();
+  };
+  $("#sel-proj").onclick=projectSelection;
+
+  $("#picker-body").addEventListener("input",e=>{if(e.target.id==="book-filter"){pk.filter=e.target.value;renderBookList()}});
+  $("#picker-body").addEventListener("keydown",e=>{if(e.target.id==="book-filter"&&e.key==="Enter"){const f=$("#book-list button");f&&f.click()}});
+  $("#picker-body").addEventListener("click",e=>{
+    const t=e.target.closest("button");if(!t)return;
+    if(t.dataset.stepPk){pk.step=t.dataset.stepPk;renderPicker()}
+    else if(t.dataset.b){pk.b=+t.dataset.b;if(chapterCount(pk.b)===1){pk.c=1;pk.step="versiculo"}else pk.step="capitulo";renderPicker()}
+    else if(t.dataset.c){pk.c=+t.dataset.c;pk.step="versiculo";renderPicker()}
+    else if(t.dataset.vv){$("#picker").close();goTo(pk.b,pk.c,+t.dataset.vv)}
+    else if("read" in t.dataset){$("#picker").close();goTo(pk.b,pk.c)}
+  });
+
+  let qt;$("#q").addEventListener("input",()=>{clearTimeout(qt);qt=setTimeout(renderResults,220)});
+  $("#q").addEventListener("keydown",e=>{if(e.key==="Enter"){const f=$("#results .result");f&&f.click()}});
+  document.addEventListener("click",e=>{
+    const to=e.target.closest("[data-to]");if(to){const [b,c,v]=to.dataset.to.split(",").map(Number);goTo(b,c,v||undefined);return}
+    const vd=e.target.closest("[data-video]");if(vd)stageVideo(vd.dataset.video);
+  });
+
+  $("#open-win").onclick=openProjector;
+  $("#open-ovl").onclick=openOverlay;
+  $("#p-prev").onclick=()=>projStep(-1);
+  $("#p-next").onclick=()=>projStep(1);
+  $("#p-black").onclick=toggleBlack;
+  $("#proj-ref-form").onsubmit=e=>{
+    e.preventDefault();const r=parseRef($("#proj-ref").value);
+    if(!r){toast("No reconozco esa cita. Prueba con Juan 3:16 o Sal 23:1-3");return}
+    const v1=r.v1||1,v2=r.v1?r.v2:1;setLive({type:"verse",b:r.b,c:r.c,v1,v2:Math.min(v2,v1+12)});
+  };
+  $("#ovl-prev").onclick=()=>{projStep(-1);flashBar()};
+  $("#ovl-next").onclick=()=>{projStep(1);flashBar()};
+  $("#ovl-l").onclick=()=>{projStep(-1);flashBar()};
+  $("#ovl-r").onclick=()=>{projStep(1);flashBar()};
+  $("#ovl-exit").onclick=closeOverlay;
+  $("#ovl").addEventListener("mousemove",flashBar);
+  document.addEventListener("fullscreenchange",()=>{if(!document.fullscreenElement&&ovlOpen())closeOverlay()});
+  window.addEventListener("resize",()=>{fit($("#preview"));if(ovlOpen())fit($("#ovl-stage"))});
+
+  $("#quiz").addEventListener("click",e=>{
+    const t=e.target.closest("button");if(!t)return;
+    if(t.dataset.level)startQuiz(t.dataset.level);
+    else if(t.dataset.i!==undefined)answer(+t.dataset.i);
+    else if(t.dataset.q==="next")nextQuestion();
+    else if(t.dataset.q==="reveal")answer(-1);
+    else if(t.dataset.q==="again")startQuiz(Q.level);
+    else if(t.dataset.q==="menu"){stopTimer();Q.phase="inicio";if(live&&live.type==="quiz"){live=null;paint()}renderQuiz()}
+  });
+
+  $("#v-perfil").addEventListener("click",async e=>{
+    const m=e.target.closest("button[data-mine]");
+    if(m){
+      if(m.dataset.mine==="new")openEditor();
+      else if(m.dataset.mine==="edit")openEditor(m.dataset.id);
+      else if(m.dataset.mine==="delete"){if(confirm("¿Eliminar esta pregunta?")){await DB.del(m.dataset.id);MINE=MINE.filter(q=>q.id!==m.dataset.id);renderProfile();toast("Pregunta eliminada")}}
+      else if(m.dataset.mine==="export")exportMine();
+      return;
+    }
+    const r=e.target.closest("[data-reset]");if(!r)return;
+    const k=r.dataset.reset;
+    if(k==="marks"&&confirm("¿Borrar todos los versículos marcados?")){MARKS.clear();store.set("marks",[]);renderProfile();if(BIBLE)renderChapter();toast("Marcas borradas")}
+    if(k==="stats"&&confirm("¿Reiniciar las estadísticas?")){Object.assign(STATS,{games:0,answered:0,correct:0});store.set("stats",STATS);renderProfile()}
+    if(k==="cfg"&&confirm("¿Volver a los ajustes originales? Tu nombre, preguntas y marcas se mantienen.")){const name=CFG.name;Object.assign(CFG,JSON.parse(JSON.stringify(DEF)),{name});saveCfg();applyPrefs();renderChapter();paint();renderProfile();toast("Ajustes restablecidos")}
+  });
+  $("#v-perfil").addEventListener("change",e=>{if(e.target.matches('input[data-mine="import"]')&&e.target.files[0]){importMine(e.target.files[0]);e.target.value=""}});
+
+  document.addEventListener("keydown",e=>{
+    if(e.target.closest("input,textarea,dialog,video"))return;
+    if(ovlOpen()){if(e.key==="Escape")closeOverlay();else handleProjKey(e);return}
+    if(S.view==="proyectar"){handleProjKey(e);return}
+    if(S.view==="leer"&&!e.target.closest(".v")){
+      if(e.key==="ArrowRight"){const p=stepChapter(1);p&&goTo(p.b,p.c)}
+      if(e.key==="ArrowLeft"){const p=stepChapter(-1);p&&goTo(p.b,p.c)}
+      if(e.key==="Escape"&&sel.size)$("#sel-clear").click();
+    }
+  });
+}
+
+async function init(){
+  const style=document.createElement("style");style.textContent=STAGE_CSS;document.head.appendChild(style);
+  applyPrefs();
+  try{
+    const [vers,quiz,rem]=await Promise.all([getJSON(DATA.versiones).catch(()=>[VER]),getJSON(DATA.preguntas),getJSON("datos/remoto.json").catch(()=>({}))]);
+    REMOTE_CFG={...REMOTE_CFG,...rem};
+    VERSIONS=vers.length?vers:[VER];QUIZ=quiz;
+    const order=[CFG.versionElegida?CFG.version:"",...VERSIONS.map(v=>v.id)].filter((id,i,a)=>id&&a.indexOf(id)===i&&VERSIONS.some(v=>v.id===id));
+    let loaded=null,lastErr=null;
+    for(const id of order){try{await loadVersion(id);loaded=id;break}catch(e){lastErr=e;console.warn("No se pudo cargar",id,e)}}
+    if(!loaded)throw lastErr||new Error("sin versiones");
+    if(CFG.versionElegida&&CFG.version!==loaded)setTimeout(()=>toast("No se encontró la versión elegida. Se abrió "+VER.nombre),600);
+    if(!CFG.versionElegida)CFG.version=loaded;
+    ILLUS=await loadIllustrations();
+  }catch(err){
+    $("#loading").textContent=location.protocol==="file:"
+      ?"Abre la app desde su dirección web o con un servidor local. Con doble clic el navegador no deja cargar el texto bíblico."
+      :"No se pudo cargar el texto bíblico. Revisa tu conexión y vuelve a intentarlo.";
+    console.error(err);return;
+  }
+  try{MINE=(await DB.all()).sort((a,b)=>(b.created||0)-(a.created||0))}catch(e){MINE=[]}
+  if(!BIBLE[S.b]||S.c>chapterCount(S.b)){S.b=42;S.c=3}
+  $$('[data-slot="reading"]').forEach(s=>s.innerHTML=readingControls());
+  $$('[data-slot="projection"]').forEach(s=>s.innerHTML=projectionControls());
+  bind();bindRemote();syncControls();renderChapter();
+  const joinCode=(location.hash.match(/control=([A-Za-z0-9]{6})/)||[])[1];
+  if(joinCode)history.replaceState(null,"",location.pathname+location.search);
+  show(joinCode?"proyectar":(["leer","buscar","preguntas","proyectar","perfil"].includes(S.view)?S.view:"leer"));
+  renderRemote();
+  if(remoteReady()){
+    const saved=remoteSession.get();
+    if(joinCode)remoteStart("control",cleanCode(joinCode));
+    else if(saved&&saved.role&&saved.code)remoteStart(saved.role,saved.code);
+  }
+  $("#loading").remove();
+  if("serviceWorker" in navigator&&location.protocol.startsWith("http"))navigator.serviceWorker.register("sw.js").catch(()=>{});
+}
+init();
+
+</script>
+</body>
+</html>

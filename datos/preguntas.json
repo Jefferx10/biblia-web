@@ -1,0 +1,1438 @@
+{
+ "ninos": [
+  {
+   "q": "¿Quién construyó un arca para salvar a su familia y a los animales?",
+   "o": [
+    "Noé",
+    "Moisés",
+    "Abraham",
+    "David"
+   ],
+   "a": 0,
+   "r": [
+    0,
+    6,
+    14
+   ],
+   "e": "Dios le dio a Noé las medidas y el material para hacer el arca."
+  },
+  {
+   "q": "¿Qué ave soltó Noé que volvió con una hoja de olivo en el pico?",
+   "o": [
+    "La paloma",
+    "El cuervo",
+    "El águila",
+    "El gorrión"
+   ],
+   "a": 0,
+   "r": [
+    0,
+    8,
+    11
+   ],
+   "e": "Cuando la paloma trajo la hoja, Noé supo que las aguas estaban bajando."
+  },
+  {
+   "q": "¿Qué señal puso Dios en las nubes después del diluvio?",
+   "o": [
+    "El arco iris",
+    "Una estrella",
+    "Un rayo",
+    "La luna"
+   ],
+   "a": 0,
+   "r": [
+    0,
+    9,
+    13
+   ],
+   "e": "El arco en las nubes es la señal de la promesa de Dios con la tierra."
+  },
+  {
+   "q": "¿Qué día descansó Dios de toda su obra?",
+   "o": [
+    "El séptimo día",
+    "El primer día",
+    "El tercer día",
+    "El décimo día"
+   ],
+   "a": 0,
+   "r": [
+    0,
+    2,
+    2
+   ],
+   "e": "Dios creó en seis días y reposó el séptimo."
+  },
+  {
+   "q": "¿Qué animal le habló a Eva en el huerto?",
+   "o": [
+    "La serpiente",
+    "Un león",
+    "Una paloma",
+    "Un burro"
+   ],
+   "a": 0,
+   "r": [
+    0,
+    3,
+    1
+   ],
+   "e": "La serpiente engañó a Eva con una pregunta sobre lo que Dios había dicho."
+  },
+  {
+   "q": "¿Quién le puso nombre a todos los animales?",
+   "o": [
+    "Adán",
+    "Noé",
+    "Eva",
+    "Caín"
+   ],
+   "a": 0,
+   "r": [
+    0,
+    2,
+    20
+   ],
+   "e": "Adán dio nombre a las bestias, a las aves y a los animales del campo."
+  },
+  {
+   "q": "¿Cómo se llamaba la primera mujer?",
+   "o": [
+    "Eva",
+    "Sara",
+    "María",
+    "Rut"
+   ],
+   "a": 0,
+   "r": [
+    0,
+    3,
+    20
+   ],
+   "e": "Adán la llamó Eva porque sería madre de todos los vivientes."
+  },
+  {
+   "q": "¿Qué regalo especial le hizo Jacob a su hijo José?",
+   "o": [
+    "Una ropa de colores",
+    "Un anillo de oro",
+    "Una espada",
+    "Un caballo"
+   ],
+   "a": 0,
+   "r": [
+    0,
+    37,
+    3
+   ],
+   "e": "Jacob, también llamado Israel, le hizo a José una ropa de diversos colores."
+  },
+  {
+   "q": "¿Qué hicieron los hermanos de José con él?",
+   "o": [
+    "Lo vendieron",
+    "Lo hicieron rey",
+    "Lo escondieron en una cueva",
+    "Lo mandaron a estudiar"
+   ],
+   "a": 0,
+   "r": [
+    0,
+    37,
+    28
+   ],
+   "e": "Lo vendieron por veinte piezas de plata y lo llevaron a Egipto."
+  },
+  {
+   "q": "¿Quién extendió su mano sobre el mar y las aguas se abrieron?",
+   "o": [
+    "Moisés",
+    "Josué",
+    "Elías",
+    "Pedro"
+   ],
+   "a": 0,
+   "r": [
+    1,
+    14,
+    21
+   ],
+   "e": "Moisés extendió su mano y Dios abrió el mar para que el pueblo pasara en seco."
+  },
+  {
+   "q": "¿Cómo se llamaba el alimento que caía del cielo en el desierto?",
+   "o": [
+    "Maná",
+    "Pan de trigo",
+    "Miel silvestre",
+    "Arroz"
+   ],
+   "a": 0,
+   "r": [
+    1,
+    16,
+    31
+   ],
+   "e": "El pueblo lo llamó maná. Era blanco y sabía a hojuelas con miel."
+  },
+  {
+   "q": "¿Cómo se llamaba el hermano de Moisés?",
+   "o": [
+    "Aarón",
+    "José",
+    "Caleb",
+    "Samuel"
+   ],
+   "a": 0,
+   "r": [
+    1,
+    4,
+    14
+   ],
+   "e": "Dios le dijo a Moisés que su hermano Aarón hablaría por él."
+  },
+  {
+   "q": "¿Cuántos mandamientos escribió Dios en las tablas?",
+   "o": [
+    "Diez",
+    "Tres",
+    "Siete",
+    "Doce"
+   ],
+   "a": 0,
+   "r": [
+    4,
+    10,
+    4
+   ],
+   "e": "En las tablas quedaron escritas las diez palabras que Dios habló en el monte."
+  },
+  {
+   "q": "¿Qué pasó con el muro de Jericó cuando el pueblo gritó?",
+   "o": [
+    "Se cayó",
+    "Se hizo más alto",
+    "Se llenó de flores",
+    "Se abrió una puerta"
+   ],
+   "a": 0,
+   "r": [
+    5,
+    6,
+    20
+   ],
+   "e": "Al sonar las bocinas y gritar el pueblo, el muro cayó y entraron a la ciudad."
+  },
+  {
+   "q": "¿Qué instrumento tocaba David para que Saúl se sintiera mejor?",
+   "o": [
+    "El arpa",
+    "La trompeta",
+    "El tambor",
+    "La flauta"
+   ],
+   "a": 0,
+   "r": [
+    8,
+    16,
+    23
+   ],
+   "e": "David tocaba el arpa y Saúl encontraba alivio."
+  },
+  {
+   "q": "¿Con qué venció David al gigante Goliat?",
+   "o": [
+    "Con una honda y una piedra",
+    "Con una espada",
+    "Con arco y flechas",
+    "Con una lanza"
+   ],
+   "a": 0,
+   "r": [
+    8,
+    17,
+    50
+   ],
+   "e": "David venció al filisteo con honda y piedra, sin tener espada en su mano."
+  },
+  {
+   "q": "¿A quién echaron en el foso de los leones?",
+   "o": [
+    "Daniel",
+    "Jonás",
+    "José",
+    "Pablo"
+   ],
+   "a": 0,
+   "r": [
+    26,
+    6,
+    16
+   ],
+   "e": "Daniel fue echado al foso, pero Dios lo protegió."
+  },
+  {
+   "q": "¿Quién estuvo tres días y tres noches dentro de un gran pez?",
+   "o": [
+    "Jonás",
+    "Pedro",
+    "Noé",
+    "Elías"
+   ],
+   "a": 0,
+   "r": [
+    31,
+    2,
+    1
+   ],
+   "e": "Dios preparó un gran pez que tragó a Jonás."
+  },
+  {
+   "q": "¿En qué pueblo nació Jesús?",
+   "o": [
+    "Belén",
+    "Nazaret",
+    "Jerusalén",
+    "Capernaum"
+   ],
+   "a": 0,
+   "r": [
+    39,
+    2,
+    1
+   ],
+   "e": "Jesús nació en Belén de Judea, en días del rey Herodes."
+  },
+  {
+   "q": "¿Cómo se llamaba la mamá de Jesús?",
+   "o": [
+    "María",
+    "Marta",
+    "Elisabet",
+    "Ana"
+   ],
+   "a": 0,
+   "r": [
+    39,
+    1,
+    18
+   ],
+   "e": "María estaba desposada con José cuando concibió por el Espíritu Santo."
+  },
+  {
+   "q": "¿Cuántos discípulos llamó Jesús para enviarlos?",
+   "o": [
+    "Doce",
+    "Siete",
+    "Diez",
+    "Cuarenta"
+   ],
+   "a": 0,
+   "r": [
+    39,
+    10,
+    1
+   ],
+   "e": "Jesús llamó a sus doce discípulos y les dio poder para sanar."
+  },
+  {
+   "q": "¿Cuántos panes y peces tenían cuando Jesús alimentó a la multitud?",
+   "o": [
+    "5 panes y 2 peces",
+    "2 panes y 5 peces",
+    "7 panes y 3 peces",
+    "10 panes y 1 pez"
+   ],
+   "a": 0,
+   "r": [
+    39,
+    14,
+    17
+   ],
+   "e": "Solo tenían cinco panes y dos peces, y Jesús alimentó a miles."
+  },
+  {
+   "q": "¿Qué discípulo caminó sobre el agua para ir hacia Jesús?",
+   "o": [
+    "Pedro",
+    "Juan",
+    "Tomás",
+    "Judas"
+   ],
+   "a": 0,
+   "r": [
+    39,
+    14,
+    29
+   ],
+   "e": "Jesús le dijo «Ven» y Pedro bajó del barco y anduvo sobre las aguas."
+  },
+  {
+   "q": "¿Qué hizo Jesús en una boda en Caná?",
+   "o": [
+    "Convirtió el agua en vino",
+    "Multiplicó panes",
+    "Calmó una tormenta",
+    "Sanó a un ciego"
+   ],
+   "a": 0,
+   "r": [
+    42,
+    2,
+    9
+   ],
+   "e": "Fue su primera señal: el agua se convirtió en vino."
+  },
+  {
+   "q": "¿A dónde subió Zaqueo para poder ver a Jesús?",
+   "o": [
+    "A un árbol",
+    "A un techo",
+    "A un monte",
+    "A un barco"
+   ],
+   "a": 0,
+   "r": [
+    41,
+    19,
+    4
+   ],
+   "e": "Zaqueo era pequeño de estatura y subió a un sicómoro."
+  },
+  {
+   "q": "En la parábola, ¿cuántas ovejas tenía el pastor antes de perder una?",
+   "o": [
+    "Cien",
+    "Diez",
+    "Cincuenta",
+    "Mil"
+   ],
+   "a": 0,
+   "r": [
+    41,
+    15,
+    4
+   ],
+   "e": "Dejó las noventa y nueve para buscar la que se había perdido."
+  },
+  {
+   "q": "¿Qué dijo Jesús cuando no dejaban que los niños se acercaran?",
+   "o": [
+    "Dejen que los niños vengan a mí",
+    "Vayan a su casa",
+    "Esperen afuera",
+    "Vuelvan mañana"
+   ],
+   "a": 0,
+   "r": [
+    40,
+    10,
+    14
+   ],
+   "e": "Jesús se enojó con los discípulos y dijo que de los niños es el reino de Dios."
+  },
+  {
+   "q": "¿Al cuántos días resucitó Jesús?",
+   "o": [
+    "Al tercer día",
+    "Al primer día",
+    "Al séptimo día",
+    "A los cuarenta días"
+   ],
+   "a": 0,
+   "r": [
+    41,
+    24,
+    46
+   ],
+   "e": "Así estaba escrito: el Cristo resucitaría al tercer día."
+  },
+  {
+   "q": "¿Cuál es el primer libro de la Biblia?",
+   "o": [
+    "Génesis",
+    "Éxodo",
+    "Mateo",
+    "Salmos"
+   ],
+   "a": 0,
+   "r": [
+    0,
+    1,
+    1
+   ],
+   "e": "Génesis comienza con la creación de los cielos y la tierra."
+  },
+  {
+   "q": "¿Cuál es el último libro de la Biblia?",
+   "o": [
+    "Apocalipsis",
+    "Judas",
+    "Malaquías",
+    "Hechos"
+   ],
+   "a": 0,
+   "r": [
+    65,
+    22,
+    21
+   ],
+   "e": "Apocalipsis cierra la Biblia con las visiones que recibió Juan."
+  },
+  {
+   "q": "¿Dónde dice «Todo lo puedo en Cristo que me fortalece»?",
+   "o": [
+    "Filipenses 4:13",
+    "Juan 3:16",
+    "Salmos 23:1",
+    "Génesis 1:1"
+   ],
+   "a": 0,
+   "r": [
+    49,
+    4,
+    13
+   ],
+   "e": "Pablo lo escribió en su carta a los Filipenses."
+  },
+  {
+   "q": "Completa el salmo: «Jehová es mi…»",
+   "o": [
+    "Pastor",
+    "Rey",
+    "Amigo",
+    "Maestro"
+   ],
+   "a": 0,
+   "r": [
+    18,
+    23,
+    1
+   ],
+   "e": "El Salmo 23 compara a Dios con un pastor que cuida a sus ovejas."
+  },
+  {
+   "q": "¿Qué historia muestra el dibujo?",
+   "img": "arca",
+   "o": [
+    "Noé y el arca",
+    "Jonás y el gran pez",
+    "Moisés cruza el mar",
+    "Daniel y los leones"
+   ],
+   "a": 0,
+   "r": [
+    0,
+    6,
+    14
+   ],
+   "e": "Dios salvó a Noé, a su familia y a los animales en el arca, y después puso el arco iris en las nubes."
+  },
+  {
+   "q": "¿Qué historia muestra el dibujo?",
+   "img": "jonas",
+   "o": [
+    "Jonás y el gran pez",
+    "Noé y el arca",
+    "Pedro camina sobre el agua",
+    "Moisés cruza el mar"
+   ],
+   "a": 0,
+   "r": [
+    31,
+    2,
+    1
+   ],
+   "e": "Jonás estuvo tres días y tres noches dentro del gran pez."
+  },
+  {
+   "q": "¿Qué historia muestra el dibujo?",
+   "img": "david",
+   "o": [
+    "David y Goliat",
+    "Sansón y los filisteos",
+    "Josué y Jericó",
+    "Saúl y David"
+   ],
+   "a": 0,
+   "r": [
+    8,
+    17,
+    50
+   ],
+   "e": "David, siendo joven, venció al gigante con una honda y una piedra."
+  },
+  {
+   "q": "¿Qué historia muestra el dibujo?",
+   "img": "daniel",
+   "o": [
+    "Daniel en el foso de los leones",
+    "Sansón y el león",
+    "José en la cisterna",
+    "Pablo en la cárcel"
+   ],
+   "a": 0,
+   "r": [
+    26,
+    6,
+    16
+   ],
+   "e": "Daniel siguió orando a Dios y Dios lo protegió de los leones."
+  },
+  {
+   "q": "¿Qué historia muestra el dibujo?",
+   "img": "belen",
+   "o": [
+    "El nacimiento de Jesús",
+    "Moisés en el río",
+    "Samuel en el templo",
+    "La boda de Caná"
+   ],
+   "a": 0,
+   "r": [
+    41,
+    2,
+    7
+   ],
+   "e": "María acostó a Jesús en un pesebre porque no había lugar en el mesón."
+  },
+  {
+   "q": "¿Qué historia muestra el dibujo?",
+   "img": "panes",
+   "o": [
+    "Jesús alimenta a la multitud",
+    "La última cena",
+    "El maná del desierto",
+    "Las bodas de Caná"
+   ],
+   "a": 0,
+   "r": [
+    39,
+    14,
+    17
+   ],
+   "e": "Con cinco panes y dos peces Jesús dio de comer a miles de personas."
+  },
+  {
+   "q": "¿Qué historia muestra el dibujo?",
+   "img": "mar",
+   "o": [
+    "El pueblo cruza el mar",
+    "Noé y el diluvio",
+    "Jonás en el mar",
+    "Jesús calma la tormenta"
+   ],
+   "a": 0,
+   "r": [
+    1,
+    14,
+    22
+   ],
+   "e": "Israel pasó en seco, con las aguas como un muro a cada lado."
+  },
+  {
+   "q": "¿Qué historia muestra el dibujo?",
+   "img": "jerico",
+   "o": [
+    "Cae el muro de Jericó",
+    "La torre de Babel",
+    "Nehemías reconstruye el muro",
+    "Sansón derriba el templo"
+   ],
+   "a": 0,
+   "r": [
+    5,
+    6,
+    20
+   ],
+   "e": "Al sonido de las bocinas y el grito del pueblo, el muro de Jericó cayó."
+  },
+  {
+   "q": "¿Qué historia muestra el dibujo?",
+   "img": "zaqueo",
+   "o": [
+    "Zaqueo sube al árbol",
+    "Adán y Eva en el huerto",
+    "Jesús y la higuera",
+    "Absalón en la encina"
+   ],
+   "a": 0,
+   "r": [
+    41,
+    19,
+    4
+   ],
+   "e": "Zaqueo subió a un sicómoro para poder ver a Jesús."
+  },
+  {
+   "q": "¿Qué historia muestra el dibujo?",
+   "img": "tablas",
+   "o": [
+    "Los diez mandamientos",
+    "El arca del pacto",
+    "Las tablas de Nehemías",
+    "El templo de Salomón"
+   ],
+   "a": 0,
+   "r": [
+    4,
+    10,
+    4
+   ],
+   "e": "Dios escribió los mandamientos en tablas de piedra para su pueblo."
+  },
+  {
+   "q": "¿Qué historia muestra el dibujo?",
+   "img": "tumba",
+   "o": [
+    "Jesús resucitó",
+    "Lázaro sale de la tumba",
+    "Daniel sale del foso",
+    "José sale de la cárcel"
+   ],
+   "a": 0,
+   "r": [
+    41,
+    24,
+    2
+   ],
+   "e": "Las mujeres encontraron la piedra removida y el sepulcro vacío."
+  },
+  {
+   "q": "¿Qué historia muestra el dibujo?",
+   "img": "zarza",
+   "o": [
+    "Moisés y la zarza que ardía",
+    "Elías y el fuego del cielo",
+    "Los tres jóvenes en el horno",
+    "Gedeón y las antorchas"
+   ],
+   "a": 0,
+   "r": [
+    1,
+    3,
+    2
+   ],
+   "e": "La zarza ardía en fuego pero no se consumía, y Dios habló con Moisés."
+  }
+ ],
+ "adultos": [
+  {
+   "q": "¿A quién anunció el ángel que su esposa Elisabet tendría un hijo llamado Juan?",
+   "o": [
+    "Zacarías",
+    "José",
+    "Simeón",
+    "Nicodemo"
+   ],
+   "a": 0,
+   "r": [
+    41,
+    1,
+    13
+   ],
+   "e": "El ángel se apareció a Zacarías en el templo mientras ministraba."
+  },
+  {
+   "q": "¿Qué rey murió la noche en que Daniel interpretó la escritura en la pared?",
+   "o": [
+    "Belsasar",
+    "Nabucodonosor",
+    "Darío",
+    "Ciro"
+   ],
+   "a": 0,
+   "r": [
+    26,
+    5,
+    30
+   ],
+   "e": "Belsasar, rey de los caldeos, murió esa misma noche."
+  },
+  {
+   "q": "Según Génesis, ¿cuántos años vivió Matusalén?",
+   "o": [
+    "969",
+    "930",
+    "950",
+    "777"
+   ],
+   "a": 0,
+   "r": [
+    0,
+    5,
+    27
+   ],
+   "e": "Vivió 969 años. Adán vivió 930, Noé 950 y Lamec 777."
+  },
+  {
+   "q": "¿Qué profeta subió al cielo en un torbellino?",
+   "o": [
+    "Elías",
+    "Eliseo",
+    "Enoc",
+    "Isaías"
+   ],
+   "a": 0,
+   "r": [
+    11,
+    2,
+    11
+   ],
+   "e": "Un carro de fuego separó a Elías de Eliseo y Elías subió en un torbellino."
+  },
+  {
+   "q": "¿En qué monte desafió Elías a los profetas de Baal?",
+   "o": [
+    "Carmelo",
+    "Sinaí",
+    "Monte de los Olivos",
+    "Nebo"
+   ],
+   "a": 0,
+   "r": [
+    10,
+    18,
+    19
+   ],
+   "e": "Elías pidió reunir a Israel y a los 450 profetas de Baal en el monte Carmelo."
+  },
+  {
+   "q": "¿Quién fue lleno de espíritu de sabiduría cuando Moisés impuso sus manos sobre él?",
+   "o": [
+    "Josué",
+    "Caleb",
+    "Aarón",
+    "Eleazar"
+   ],
+   "a": 0,
+   "r": [
+    4,
+    34,
+    9
+   ],
+   "e": "Josué hijo de Nun sucedió a Moisés al frente del pueblo."
+  },
+  {
+   "q": "¿De qué ciudad era ciudadano el apóstol Pablo?",
+   "o": [
+    "Tarso",
+    "Antioquía",
+    "Éfeso",
+    "Corinto"
+   ],
+   "a": 0,
+   "r": [
+    43,
+    21,
+    39
+   ],
+   "e": "Pablo se presentó como ciudadano de Tarso, en Cilicia."
+  },
+  {
+   "q": "¿Con quién se casó Isaac?",
+   "o": [
+    "Rebeca",
+    "Raquel",
+    "Lea",
+    "Sara"
+   ],
+   "a": 0,
+   "r": [
+    0,
+    24,
+    67
+   ],
+   "e": "Isaac tomó a Rebeca por mujer y fue consolado tras la muerte de Sara, su madre."
+  },
+  {
+   "q": "¿Qué oficio tenía Lucas, según Pablo?",
+   "o": [
+    "Médico",
+    "Pescador",
+    "Cobrador de impuestos",
+    "Fabricante de tiendas"
+   ],
+   "a": 0,
+   "r": [
+    50,
+    4,
+    14
+   ],
+   "e": "Pablo lo llama «el médico amado» en Colosenses."
+  },
+  {
+   "q": "¿Qué mujer, profetisa, gobernaba Israel en tiempos de los jueces?",
+   "o": [
+    "Débora",
+    "Miriam",
+    "Ana",
+    "Hulda"
+   ],
+   "a": 0,
+   "r": [
+    6,
+    4,
+    4
+   ],
+   "e": "Débora juzgaba a Israel y animó a Barac a salir a la batalla."
+  },
+  {
+   "q": "¿Quién fue apedreado mientras decía «Señor Jesús, recibe mi espíritu»?",
+   "o": [
+    "Esteban",
+    "Santiago",
+    "Felipe",
+    "Bernabé"
+   ],
+   "a": 0,
+   "r": [
+    43,
+    7,
+    59
+   ],
+   "e": "Esteban oró por sus perseguidores mientras lo apedreaban."
+  },
+  {
+   "q": "¿Qué rey comenzó a edificar la casa de Jehová en Jerusalén?",
+   "o": [
+    "Salomón",
+    "David",
+    "Ezequías",
+    "Josías"
+   ],
+   "a": 0,
+   "r": [
+    10,
+    6,
+    1
+   ],
+   "e": "Salomón comenzó la obra en el cuarto año de su reinado."
+  },
+  {
+   "q": "En Gálatas 5:22, ¿cuál es el primer fruto del Espíritu que se menciona?",
+   "o": [
+    "Amor (caridad)",
+    "Gozo",
+    "Paz",
+    "Fe"
+   ],
+   "a": 0,
+   "r": [
+    47,
+    5,
+    22
+   ],
+   "e": "La Reina-Valera 1960 dice «amor»; la de 1909 traduce la misma palabra como «caridad»."
+  },
+  {
+   "q": "¿Cómo se llamaba el suegro de Moisés, sacerdote de Madián?",
+   "o": [
+    "Jetro",
+    "Labán",
+    "Elí",
+    "Balaam"
+   ],
+   "a": 0,
+   "r": [
+    1,
+    18,
+    1
+   ],
+   "e": "Jetro le aconsejó a Moisés repartir la carga de juzgar al pueblo."
+  },
+  {
+   "q": "¿En qué isla estaba Juan cuando recibió las visiones del Apocalipsis?",
+   "o": [
+    "Patmos",
+    "Chipre",
+    "Creta",
+    "Malta"
+   ],
+   "a": 0,
+   "r": [
+    65,
+    1,
+    9
+   ],
+   "e": "Juan estaba en Patmos por causa de la palabra de Dios."
+  },
+  {
+   "q": "¿A quién le dijo Mardoqueo que quizás había llegado al reino «para esta hora»?",
+   "o": [
+    "Ester",
+    "Rut",
+    "Débora",
+    "Abigail"
+   ],
+   "a": 0,
+   "r": [
+    16,
+    4,
+    14
+   ],
+   "e": "Mardoqueo animó a la reina Ester a interceder por su pueblo."
+  },
+  {
+   "q": "¿En qué tierra vivía Job?",
+   "o": [
+    "Uz (Hus)",
+    "Ur",
+    "Canaán",
+    "Moab"
+   ],
+   "a": 0,
+   "r": [
+    17,
+    1,
+    1
+   ],
+   "e": "Job era un varón perfecto y recto de la tierra de Hus."
+  },
+  {
+   "q": "¿Cuántos años anduvo Israel por el desierto?",
+   "o": [
+    "Cuarenta",
+    "Doce",
+    "Setenta",
+    "Siete"
+   ],
+   "a": 0,
+   "r": [
+    3,
+    14,
+    33
+   ],
+   "e": "Por su incredulidad, el pueblo anduvo cuarenta años en el desierto."
+  },
+  {
+   "q": "¿A quién obligaron a llevar la cruz de Jesús?",
+   "o": [
+    "Simón de Cirene",
+    "José de Arimatea",
+    "Nicodemo",
+    "Simón Pedro"
+   ],
+   "a": 0,
+   "r": [
+    39,
+    27,
+    32
+   ],
+   "e": "Encontraron a un cireneo llamado Simón y lo obligaron a cargar la cruz."
+  },
+  {
+   "q": "¿Qué otro nombre tenía Saulo?",
+   "o": [
+    "Pablo",
+    "Pedro",
+    "Silas",
+    "Timoteo"
+   ],
+   "a": 0,
+   "r": [
+    43,
+    13,
+    9
+   ],
+   "e": "Hechos presenta a «Saulo, que también es Pablo»."
+  },
+  {
+   "q": "¿Qué discípulo exclamó «¡Señor mío, y Dios mío!»?",
+   "o": [
+    "Tomás",
+    "Pedro",
+    "Juan",
+    "Felipe"
+   ],
+   "a": 0,
+   "r": [
+    42,
+    20,
+    28
+   ],
+   "e": "Tomás lo dijo al ver a Jesús resucitado, después de haber dudado."
+  },
+  {
+   "q": "¿Cuántas piezas de plata le dieron a Judas por entregar a Jesús?",
+   "o": [
+    "Treinta",
+    "Veinte",
+    "Cuarenta",
+    "Cien"
+   ],
+   "a": 0,
+   "r": [
+    39,
+    26,
+    15
+   ],
+   "e": "Le señalaron treinta piezas de plata. José, en cambio, fue vendido por veinte."
+  },
+  {
+   "q": "¿Qué profeta fue llevado a un campo lleno de huesos?",
+   "o": [
+    "Ezequiel",
+    "Jeremías",
+    "Daniel",
+    "Amós"
+   ],
+   "a": 0,
+   "r": [
+    25,
+    37,
+    1
+   ],
+   "e": "En la visión de Ezequiel, los huesos secos volvieron a la vida."
+  },
+  {
+   "q": "Rut fue madre de Obed. ¿Qué parentesco tenía con el rey David?",
+   "o": [
+    "Bisabuela",
+    "Abuela",
+    "Madre",
+    "Tía"
+   ],
+   "a": 0,
+   "r": [
+    7,
+    4,
+    17
+   ],
+   "e": "Obed fue padre de Isaí, y Isaí fue padre de David."
+  },
+  {
+   "q": "¿Qué rey soñó con una gran imagen de oro, plata, bronce, hierro y barro?",
+   "o": [
+    "Nabucodonosor",
+    "Belsasar",
+    "Faraón",
+    "Darío"
+   ],
+   "a": 0,
+   "r": [
+    26,
+    2,
+    31
+   ],
+   "e": "Daniel interpretó el sueño de Nabucodonosor sobre los reinos futuros."
+  },
+  {
+   "q": "¿Qué matrimonio vendió una posesión y mintió sobre el precio?",
+   "o": [
+    "Ananías y Safira",
+    "Aquila y Priscila",
+    "Abraham y Sara",
+    "Zacarías y Elisabet"
+   ],
+   "a": 0,
+   "r": [
+    43,
+    5,
+    1
+   ],
+   "e": "Ananías y Safira retuvieron parte del precio y mintieron al Espíritu Santo."
+  },
+  {
+   "q": "¿Qué rey de Salem, sacerdote del Dios Altísimo, sacó pan y vino a Abram?",
+   "o": [
+    "Melquisedec",
+    "Abimelec",
+    "Faraón",
+    "Lot"
+   ],
+   "a": 0,
+   "r": [
+    0,
+    14,
+    18
+   ],
+   "e": "Melquisedec bendijo a Abram después de su victoria."
+  },
+  {
+   "q": "¿Cuántos capítulos tiene el libro de los Salmos?",
+   "o": [
+    "150",
+    "119",
+    "100",
+    "176"
+   ],
+   "a": 0,
+   "r": [
+    18,
+    150,
+    6
+   ],
+   "e": "Son 150 salmos. El 119 es el más largo, con 176 versículos."
+  },
+  {
+   "q": "¿Qué libro dice que todo lo que se quiere debajo del cielo tiene su tiempo u hora?",
+   "o": [
+    "Eclesiastés",
+    "Proverbios",
+    "Job",
+    "Cantares"
+   ],
+   "a": 0,
+   "r": [
+    20,
+    3,
+    1
+   ],
+   "e": "Eclesiastés 3 enumera los tiempos de la vida."
+  },
+  {
+   "q": "Según Romanos 6:23, ¿cuál es la paga del pecado?",
+   "o": [
+    "Muerte",
+    "Tristeza",
+    "Pobreza",
+    "Soledad"
+   ],
+   "a": 0,
+   "r": [
+    44,
+    6,
+    23
+   ],
+   "e": "La paga del pecado es muerte, pero la dádiva de Dios es vida eterna."
+  },
+  {
+   "q": "¿Cuál es el libro con menos versículos de toda la Biblia?",
+   "o": [
+    "2 Juan",
+    "Abdías",
+    "Judas",
+    "Filemón"
+   ],
+   "a": 0,
+   "r": [
+    62,
+    1,
+    13
+   ],
+   "e": "2 Juan tiene 13 versículos, 3 Juan 14, Abdías 21 y Judas 25."
+  },
+  {
+   "q": "¿Cómo define Hebreos 11:1 la fe?",
+   "o": [
+    "La certeza de lo que se espera",
+    "El fruto de las buenas obras",
+    "La herencia de los padres",
+    "La recompensa de los justos"
+   ],
+   "a": 0,
+   "r": [
+    57,
+    11,
+    1
+   ],
+   "e": "Según la versión, la fe es la certeza o sustancia de lo que se espera, y la convicción o demostración de lo que no se ve."
+  },
+  {
+   "q": "¿En qué libro se narra esta escena?",
+   "img": "arca",
+   "o": [
+    "Génesis",
+    "Éxodo",
+    "Números",
+    "Josué"
+   ],
+   "a": 0,
+   "r": [
+    0,
+    7,
+    1
+   ],
+   "e": "El diluvio y el arca se narran en Génesis 6 al 9."
+  },
+  {
+   "q": "¿Qué ciudad debía visitar el profeta de esta escena?",
+   "img": "jonas",
+   "o": [
+    "Nínive",
+    "Babilonia",
+    "Tarsis",
+    "Jope"
+   ],
+   "a": 0,
+   "r": [
+    31,
+    1,
+    2
+   ],
+   "e": "Dios envió a Jonás a Nínive; él huyó hacia Tarsis y terminó en el pez."
+  },
+  {
+   "q": "¿En qué libro se narra esta escena?",
+   "img": "david",
+   "o": [
+    "1 Samuel",
+    "2 Samuel",
+    "1 Reyes",
+    "Jueces"
+   ],
+   "a": 0,
+   "r": [
+    8,
+    17,
+    50
+   ],
+   "e": "La victoria de David sobre Goliat está en 1 Samuel 17."
+  },
+  {
+   "q": "¿Qué rey mandó echar a Daniel al foso?",
+   "img": "daniel",
+   "o": [
+    "Darío",
+    "Nabucodonosor",
+    "Ciro",
+    "Belsasar"
+   ],
+   "a": 0,
+   "r": [
+    26,
+    6,
+    9
+   ],
+   "e": "El rey Darío firmó el decreto que prohibía orar a otro dios que no fuera él."
+  },
+  {
+   "q": "¿Qué evangelio cuenta que acostaron a Jesús en un pesebre?",
+   "img": "belen",
+   "o": [
+    "Lucas",
+    "Marcos",
+    "Juan",
+    "Mateo"
+   ],
+   "a": 0,
+   "r": [
+    41,
+    2,
+    7
+   ],
+   "e": "Lucas 2 relata el pesebre y la visita de los pastores."
+  },
+  {
+   "q": "Según Mateo, ¿cuántos hombres comieron, sin contar mujeres ni niños?",
+   "img": "panes",
+   "o": [
+    "Cinco mil",
+    "Cuatro mil",
+    "Tres mil",
+    "Doce mil"
+   ],
+   "a": 0,
+   "r": [
+    39,
+    14,
+    21
+   ],
+   "e": "Comieron como cinco mil hombres; en Mateo 15 hay otra multiplicación para cuatro mil."
+  },
+  {
+   "q": "¿En qué libro se narra esta escena?",
+   "img": "mar",
+   "o": [
+    "Éxodo",
+    "Génesis",
+    "Deuteronomio",
+    "Josué"
+   ],
+   "a": 0,
+   "r": [
+    1,
+    14,
+    22
+   ],
+   "e": "El paso del mar está en Éxodo 14."
+  },
+  {
+   "q": "El séptimo día, ¿cuántas vueltas dieron alrededor de la ciudad?",
+   "img": "jerico",
+   "o": [
+    "Siete",
+    "Una",
+    "Tres",
+    "Doce"
+   ],
+   "a": 0,
+   "r": [
+    5,
+    6,
+    15
+   ],
+   "e": "Los seis días anteriores dieron una vuelta diaria; el séptimo, siete vueltas."
+  },
+  {
+   "q": "¿Qué oficio tenía el hombre del árbol?",
+   "img": "zaqueo",
+   "o": [
+    "Jefe de publicanos",
+    "Sacerdote",
+    "Centurión",
+    "Pescador"
+   ],
+   "a": 0,
+   "r": [
+    41,
+    19,
+    2
+   ],
+   "e": "Zaqueo era el principal de los publicanos y era rico."
+  },
+  {
+   "q": "¿En qué monte recibió Moisés las tablas de piedra?",
+   "img": "tablas",
+   "o": [
+    "Sinaí",
+    "Carmelo",
+    "Sion",
+    "Tabor"
+   ],
+   "a": 0,
+   "r": [
+    1,
+    31,
+    18
+   ],
+   "e": "Dios dio a Moisés las tablas del testimonio en el monte Sinaí."
+  },
+  {
+   "q": "Según Mateo, ¿quién removió la piedra del sepulcro?",
+   "img": "tumba",
+   "o": [
+    "Un ángel del Señor",
+    "José de Arimatea",
+    "Pedro",
+    "Los soldados"
+   ],
+   "a": 0,
+   "r": [
+    39,
+    28,
+    2
+   ],
+   "e": "Hubo un gran terremoto y el ángel del Señor removió la piedra."
+  },
+  {
+   "q": "¿Cómo se llamaba el monte donde Moisés vio la zarza?",
+   "img": "zarza",
+   "o": [
+    "Horeb",
+    "Nebo",
+    "Carmelo",
+    "Gilboa"
+   ],
+   "a": 0,
+   "r": [
+    1,
+    3,
+    1
+   ],
+   "e": "Moisés llegó a Horeb, monte de Dios, apacentando las ovejas de Jetro."
+  }
+ ]
+}

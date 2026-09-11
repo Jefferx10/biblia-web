@@ -578,7 +578,18 @@ async function changeVersion(id){
     toast("No se pudo cargar esa versión. Revisa que el archivo exista en datos/.");
   }
 }
-async function getJSON(url){const r=await fetch(url);if(!r.ok)throw new Error(url+" respondió "+r.status);return r.json()}
+async function getJSON(url,retry=true){
+  let r;
+  try{r=await fetch(retry?url:url+(url.includes("?")?"&":"?")+"fresco="+Date.now(),retry?{}:{cache:"no-store"})}
+  catch(e){throw new Error("sin conexión al pedir "+url)}
+  const text=r.ok?await r.text():"";
+  const html=/text\/html/.test(r.headers.get("content-type")||"")||text.trimStart().startsWith("<");
+  if(r.ok&&!html){try{return JSON.parse(text)}catch(e){if(!retry)throw new Error("el archivo "+url+" está dañado o incompleto")}}
+  /* una copia vieja o equivocada en caché: se pide de nuevo directo al servidor */
+  if(retry)return getJSON(url,false);
+  if(!r.ok)throw new Error("el servidor respondió "+r.status+" al pedir "+url);
+  throw new Error("no se encontró el archivo "+url);
+}
 async function loadIllustrations(){
   const names=[...new Set([...QUIZ.ninos,...QUIZ.adultos].map(q=>q.img).filter(Boolean))];
   const out={};
@@ -1616,9 +1627,20 @@ async function init(){
     if(!CFG.versionElegida)CFG.version=loaded;
     ILLUS=await loadIllustrations();
   }catch(err){
+    /* reparación automática: borra cachés y service workers antiguos y recarga una vez */
+    let fixed=false;try{fixed=sessionStorage.getItem("lampara:reparado")==="1"}catch(e){fixed=true}
+    if(!fixed&&location.protocol.startsWith("http")&&"caches" in window){
+      try{sessionStorage.setItem("lampara:reparado","1")}catch(e){}
+      $("#loading").textContent="Actualizando la app…";
+      try{
+        await Promise.all((await caches.keys()).map(k=>caches.delete(k)));
+        if(navigator.serviceWorker)await Promise.all((await navigator.serviceWorker.getRegistrations()).map(r=>r.unregister()));
+      }catch(e){}
+      location.reload();return;
+    }
     $("#loading").textContent=location.protocol==="file:"
       ?"Abre la app desde su dirección web o con un servidor local. Con doble clic el navegador no deja cargar el texto bíblico."
-      :"No se pudo cargar el texto bíblico. Revisa tu conexión y vuelve a intentarlo.";
+      :`No se pudo abrir la app: ${err&&err.message?err.message:"error desconocido"}. Revisa que ese archivo esté subido en el repositorio, en la misma carpeta que index.html.`;
     console.error(err);return;
   }
   try{MINE=(await DB.all()).sort((a,b)=>(b.created||0)-(a.created||0))}catch(e){MINE=[]}
@@ -1636,6 +1658,7 @@ async function init(){
     else if(saved&&saved.role&&saved.code)remoteStart(saved.role,saved.code);
   }
   $("#loading").remove();
+  try{sessionStorage.removeItem("lampara:reparado")}catch(e){}
   if("serviceWorker" in navigator&&location.protocol.startsWith("http"))navigator.serviceWorker.register("sw.js").catch(()=>{});
 }
 init();
